@@ -3,7 +3,7 @@ import React from 'react';
 const AboutUs = () => {
   return (
     <div className='bg-[#fcfffc]' >
-    <div className="max-w-5xl mx-auto px-4 py-16 text-center">
+    <div className="max-w-5xl mx-auto px-4 py-8 md:py-16 text-center">
       <h1 className="text-4xl md:text-5xl font-bold text-emerald-600 mb-6">About Greenish</h1>
       
       <p className="text-lg md:text-xl text-gray-700 mb-10">

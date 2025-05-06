@@ -5,6 +5,7 @@ import Home from './../pages/Home';
 import Login from './../pages/Login';
 import Register from "../pages/Register";
 import AboutUs from './../pages/About';
+import Community from './../pages/Community';
 
 
 const router = createBrowserRouter([
@@ -35,8 +36,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path:"/contact",
-        element: <h2>Contact Us</h2>,
+        path:"/greenish/community",
+        element: <Community></Community>,
       },
 
       {

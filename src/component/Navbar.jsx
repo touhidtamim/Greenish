@@ -10,7 +10,7 @@ const Header = () => {
     { name: 'Services', href: '/services' },
     { name: 'Plant Care', href: '/plant-care' },
     { name: 'About Us', href: '/about' },
-    { name: 'Contact', href: '/contact' },
+    { name: '#GrowWithGreenish', href: '/greenish/community' },
   ];
 
   return (
