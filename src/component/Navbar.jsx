@@ -14,7 +14,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="p-4 bg-white relative">
+    <header className="p-4 bg-[#ffffff] relative">
       <div className="container flex justify-between items-center mx-auto">
         {/* Logo - Left Side */}
         <Link to="/" className="flex items-center z-10">

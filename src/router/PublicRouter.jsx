@@ -7,6 +7,10 @@ import Register from "../pages/Register";
 import AboutUs from './../pages/About';
 import Community from './../pages/Community';
 import PlantCare from "../pages/PlantCare";
+import FaQ from "../pages/FaQ";
+import Contact from './../pages/Contact';
+import TermsConditions from "../pages/TermsConditions";
+
 
 
 const router = createBrowserRouter([
@@ -39,6 +43,21 @@ const router = createBrowserRouter([
       {
         path:"/greenish/community",
         element: <Community></Community>,
+      },
+
+      {
+        path:"/greenish/faq",
+        element: <FaQ></FaQ>,
+      },
+
+      {
+        path:"/greenish/contact",
+        element: <Contact></Contact>,
+      },
+
+      {
+        path:"/greenish/terms&conditions",
+        element: <TermsConditions></TermsConditions> ,
       },
 
       {
