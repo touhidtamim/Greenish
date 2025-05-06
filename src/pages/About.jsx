@@ -2,48 +2,54 @@ import React from 'react';
 
 const AboutUs = () => {
   return (
-    <div className='bg-[#fcfffc]' >
-    <div className="max-w-5xl mx-auto px-4 py-8 md:py-16 text-center">
-      <h1 className="text-4xl md:text-5xl font-bold text-emerald-600 mb-6">About Greenish</h1>
-      
-      <p className="text-lg md:text-xl text-gray-700 mb-10">
-        At <span className="font-semibold text-emerald-500">Greenish</span>, we believe that a single plant can bring peace, joy, and healing to any corner of your home. Born from the love of greenery and the desire to reconnect with nature, Greenish is more than a subscription box — it's a lifestyle rooted in calm, care, and conscious living.
-      </p>
+    <div className="bg-[#fcfffc]">
+      <div className="max-w-6xl mx-auto px-4 py-12 md:py-20 text-center">
+        
+        <h1 className="text-4xl md:text-5xl font-extrabold text-emerald-600 mb-6 tracking-tight">
+          About <span className="text-emerald-700">Greenish</span>
+        </h1>
 
-      <div className="grid md:grid-cols-3 gap-8 text-left">
-        <div>
-          <h3 className="text-2xl font-semibold text-emerald-500 mb-2">🌱 Our Mission</h3>
-          <p className="text-gray-600">
-            To bring nature closer to every home in Bangladesh and inspire mindful living through plant care. We empower people to slow down, breathe deeper, and connect with the living world — one box at a time.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-2xl font-semibold text-emerald-500 mb-2">📦 What We Offer</h3>
-          <p className="text-gray-600">
-            Curated monthly boxes featuring handpicked indoor plants, care tools, and easy guides. Whether you're a beginner or a plant lover, our boxes make it easy and exciting to grow your green space.
-          </p>
-        </div>
-
-        <div>
-          <h3 className="text-2xl font-semibold text-emerald-500 mb-2">🤝 Why Greenish</h3>
-          <p className="text-gray-600">
-            We're local, sustainable, and community-driven. Every plant is sourced from Bangladeshi growers and packaged with care. With Greenish, you don’t just receive plants — you grow habits, heal stress, and build a connection with nature.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-emerald-600 mb-4">We Grow With You</h2>
-        <p className="text-lg text-gray-700 max-w-3xl mx-auto">
-          From your first succulent to your personal indoor jungle, Greenish is here for every step of your journey. Let’s grow together — naturally, beautifully, mindfully.
+        
+        <p className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-12">
+          At <span className="font-semibold text-emerald-500">Greenish</span>, we believe one plant can transform a space into a sanctuary. Born out of a love for greenery and a desire to reconnect with nature, we’re not just a subscription service — we’re your companions in creating a peaceful, plant-filled lifestyle.
         </p>
+
+      
+        <div className="grid md:grid-cols-3 gap-10 text-left">
+          {/* Mission */}
+          <div className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <h3 className="text-2xl font-semibold text-emerald-600 mb-3">🌱 Our Mission</h3>
+            <p className="text-gray-600 leading-relaxed">
+              To reconnect every home in Bangladesh with the healing power of nature. We inspire a mindful way of living by encouraging plant care — helping people slow down, breathe deeper, and grow peacefully.
+            </p>
+          </div>
+
+          {/* What we offer */}
+          <div className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <h3 className="text-2xl font-semibold text-emerald-600 mb-3">📦 What We Offer</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Thoughtfully curated monthly boxes with handpicked indoor plants, plant care tools, and beginner-friendly guides. Whether you're a novice or a seasoned plant lover, there's something green for you in every delivery.
+            </p>
+          </div>
+
+          {/* Why Greenish */}
+          <div className="p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300">
+            <h3 className="text-2xl font-semibold text-emerald-600 mb-3">🤝 Why Greenish</h3>
+            <p className="text-gray-600 leading-relaxed">
+              Rooted in local values, our plants are sourced from Bangladeshi growers and packed with care. Greenish isn’t just about plants — it's about building habits, easing stress, and cultivating a meaningful bond with nature.
+            </p>
+          </div>
+        </div>
+
+        {/* Closing section */}
+        <div className="mt-20">
+          <h2 className="text-3xl md:text-4xl font-bold text-emerald-600 mb-4">We Grow With You</h2>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            From your very first succulent to a thriving indoor jungle, Greenish walks with you on your plant journey. Together, let’s grow a life that’s natural, beautiful, and rooted in calm.
+          </p>
+        </div>
       </div>
     </div>
-
-    </div>
-
-
   );
 };
 

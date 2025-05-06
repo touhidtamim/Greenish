@@ -6,6 +6,7 @@ import Login from './../pages/Login';
 import Register from "../pages/Register";
 import AboutUs from './../pages/About';
 import Community from './../pages/Community';
+import PlantCare from "../pages/PlantCare";
 
 
 const router = createBrowserRouter([
@@ -21,17 +22,17 @@ const router = createBrowserRouter([
       },
 
       {
-        path:"/plant-care",
-        element: <h2>plant care tips</h2>,
+        path:"/greenish/plant-care",
+        element: <PlantCare></PlantCare>,
       },
 
       {
-        path:"/services",
+        path:"/greenish/services",
         element: <h2>Subscriptions</h2>,
       },
 
       {
-        path:"/about",
+        path:"/greenish/about",
         element: <AboutUs></AboutUs>,
       },
 

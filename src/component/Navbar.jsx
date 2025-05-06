@@ -7,9 +7,9 @@ const Header = () => {
 
   const navLinks = [
     { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'Plant Care', href: '/plant-care' },
-    { name: 'About Us', href: '/about' },
+    { name: 'Services', href: '/greenish/services' },
+    { name: 'Plant Care', href: '/greenish/plant-care' },
+    { name: 'About Us', href: '/greenish/about' },
     { name: '#GrowWithGreenish', href: '/greenish/community' },
   ];
 
