@@ -19,6 +19,26 @@ const router = createBrowserRouter([
       },
 
       {
+        path:"/plant-care",
+        element: <h2>plant care tips</h2>,
+      },
+
+      {
+        path:"/services",
+        element: <h2>Subscriptions</h2>,
+      },
+
+      {
+        path:"/about",
+        element: <h2>all about us</h2>,
+      },
+
+      {
+        path:"/contact",
+        element: <h2>Contact Us</h2>,
+      },
+
+      {
         path:"/login",
         element: <Login></Login>,
       },
