@@ -10,6 +10,7 @@ import PlantCare from "../pages/PlantCare";
 import FaQ from "../pages/FaQ";
 import Contact from './../pages/Contact';
 import TermsConditions from "../pages/TermsConditions";
+import Services from "../pages/Services";
 
 
 
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
 
       {
         path:"/greenish/services",
-        element: <h2>Subscriptions</h2>,
+        element: <Services></Services>,
       },
 
       {
