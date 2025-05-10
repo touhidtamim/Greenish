@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import { Helmet } from "react-helmet-async";
 import { FaStar } from "react-icons/fa";
 
 const testimonials = [
@@ -60,90 +61,114 @@ const testimonials = [
 
 const Community = () => {
   const [showAll, setShowAll] = useState(false);
+  const sectionRef = useRef(null); // ref for scrolling
   const visibleCards = showAll ? testimonials : testimonials.slice(0, 6);
 
-  return (
-    <div className="bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc]">
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-emerald-600 text-center mb-6">
-          Meet Our Greenish Family 🌿
-        </h1>
-        <p className="text-lg text-gray-700 text-center max-w-3xl mx-auto mb-12">
-          Greenish isn’t just about plants — it’s about people. Our community is
-          made of everyday plant lovers, families, students, and dreamers who
-          find peace and joy through greenery. Here’s how they grow with us.
-        </p>
+  const handleToggle = () => {
+    if (showAll && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+    setShowAll(!showAll);
+  };
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
-          {visibleCards.map((t, idx) => (
-            <div
-              key={idx}
-              className="bg-white shadow-lg rounded-2xl overflow-hidden transition transform hover:scale-[1.02]"
-            >
-              <img
-                src={t.image}
-                alt={t.name}
-                className="w-full h-52 object-cover sm:h-56 md:h-60"
-              />
-              <div className="p-6 flex flex-col items-center">
-                <p className="text-gray-700 italic text-center mb-3">
-                  "{t.text}"
-                </p>
-                <div className="text-sm text-emerald-600 font-semibold text-center mb-2">
-                  — {t.name}
-                </div>
-                <div className="flex justify-center">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar
-                      key={i}
-                      className={`text-yellow-400 ${
-                        i < t.rating ? "" : "opacity-30"
-                      }`}
-                    />
-                  ))}
+  return (
+    <>
+      <Helmet>
+        <title>
+          Greenish | #GrowWithGreenish - Join Our Plant Lover Community
+        </title>
+        <meta
+          name="description"
+          content="Join the Greenish community with #GrowWithGreenish. Share your plant care journey, connect with fellow plant enthusiasts, and grow together with our support!"
+        />
+      </Helmet>
+
+      <div className="bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc]">
+        <div className="max-w-6xl mx-auto px-4 py-12">
+          <h1 className="text-3xl md:text-4xl md:text-5xl font-bold text-emerald-600 text-center mb-6">
+            Meet Our Greenish Family 🌿
+          </h1>
+          <p className="text:md md:text-lg text-gray-700 text-center max-w-3xl mx-auto mb-12">
+            Greenish isn’t just about plants — it’s about people. Our community
+            is made of everyday plant lovers, families, students, and dreamers
+            who find peace and joy through greenery. Here’s how they grow with
+            us.
+          </p>
+
+          <div
+            ref={sectionRef}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10"
+          >
+            {visibleCards.map((t, idx) => (
+              <div
+                key={idx}
+                className="bg-white shadow-lg rounded-2xl overflow-hidden transition transform hover:scale-[1.02]"
+              >
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-full h-52 object-cover sm:h-56 md:h-60"
+                />
+                <div className="p-6 flex flex-col items-center">
+                  <p className="text-gray-700 italic text-center mb-3">
+                    "{t.text}"
+                  </p>
+                  <div className="text-sm text-emerald-600 font-semibold text-center mb-2">
+                    — {t.name}
+                  </div>
+                  <div className="flex justify-center">
+                    {[...Array(5)].map((_, i) => (
+                      <FaStar
+                        key={i}
+                        className={`text-yellow-400 ${
+                          i < t.rating ? "" : "opacity-30"
+                        }`}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <div className="text-center mb-12 md:mb-16">
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="bg-emerald-500 hover:bg-emerald-600 cursor-pointer text-white px-6 py-2 rounded-xl transition"
-          >
-            {showAll ? "Show Less" : "Show More"}
-          </button>
-        </div>
+          <div className="text-center mb-12 md:mb-16">
+            <button
+              onClick={handleToggle}
+              className="bg-emerald-500 hover:bg-emerald-600 cursor-pointer text-white px-6 py-2 rounded-xl transition"
+            >
+              {showAll ? "Show Less" : "Show More"}
+            </button>
+          </div>
 
-        <div className="text-center my-10 md:my-16 mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-emerald-600 mb-4">
-            Share Your Green Corner 📸
-          </h2>
-          <p className="text-gray-700 mb-4">
-            Join the movement. Tag{" "}
-            <span className="text-emerald-500 font-medium">
-              #GrowWithGreenish
-            </span>{" "}
-            on Instagram or Facebook and get featured!
-          </p>
-          <button className="bg-emerald-500 hover:bg-emerald-600 hover:cursor-pointer text-white px-6 py-2 rounded-xl transition">
-            Submit Your Story
-          </button>
-        </div>
+          <div className="text-center my-10 md:my-16 mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-emerald-600 mb-4">
+              Share Your Green Corner 📸
+            </h2>
+            <p className="text-gray-700 mb-4">
+              Join the movement. Tag{" "}
+              <span className="text-emerald-500 font-medium">
+                #GrowWithGreenish
+              </span>{" "}
+              on Instagram or Facebook and get featured!
+            </p>
+            <button className="bg-emerald-500 hover:bg-emerald-600 hover:cursor-pointer text-white px-6 py-2 rounded-xl transition">
+              Submit Your Story
+            </button>
+          </div>
 
-        <div className="text-center max-w-3xl mx-auto">
-          <h3 className="text-xl md:text-2xl font-semibold text-emerald-600 mb-2">
-            Together, We’re Growing More Than Plants.
-          </h3>
-          <p className="text-gray-700">
-            From small balconies in Dhaka to rooftops in Sylhet — Greenish
-            connects us through care, nature, and community. We're proud to grow
-            beside you.
-          </p>
+          <div className="text-center max-w-3xl mx-auto">
+            <h3 className="text-xl md:text-2xl font-semibold text-emerald-600 mb-2">
+              Together, We’re Growing More Than Plants.
+            </h3>
+            <p className="text-gray-700">
+              From small balconies in Dhaka to rooftops in Sylhet — Greenish
+              connects us through care, nature, and community. We're proud to
+              grow beside you.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,41 +1,41 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('Home');
+  const location = useLocation();
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/greenish/services' },
-    { name: 'Plant Care', href: '/greenish/plant-care' },
-    { name: 'About Us', href: '/greenish/about' },
-    { name: '#GrowWithGreenish', href: '/greenish/community' },
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/greenish/services" },
+    { name: "Plant Care", href: "/greenish/plant-care" },
+    { name: "About Us", href: "/greenish/about" },
+    { name: "#GrowWithGreenish", href: "/greenish/community" },
+    { name: "My Profile", href: "/greenish/user-profile" },
   ];
 
   return (
-    <header className="p-4 bg-[#ffffff] relative">
+    <header className="p-4 bg-[#ffffff] relative shadow">
       <div className="container flex justify-between items-center mx-auto">
-        {/* Logo - Left Side */}
+        {/* Logo */}
         <Link to="/" className="flex items-center z-10">
-          <img 
-            src="../../public/images/Logo with title.jpeg" 
-            alt="Greenish Logo" 
-            className="h-10 w-auto" 
+          <img
+            src="/images/Logo with title.jpeg"
+            alt="Greenish Logo"
+            className="h-10 w-auto"
           />
         </Link>
 
-        {/*Navigation - Middle */}
-        <nav className="hidden lg:flex absolute left-1/2 transform -translate-x-1/2">
-          <ul className="flex space-x-6">
+        {/* Navigation - Updated to use flex-grow */}
+        <nav className="hidden lg:flex flex-grow justify-center mx-4">
+          <ul className="flex space-x-2">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <Link
                   to={link.href}
                   className={`px-3 py-2 text-green-900 hover:bg-green-100 rounded font-medium transition-colors ${
-                    activeLink === link.name ? 'bg-green-200' : ''
+                    location.pathname === link.href ? "bg-green-200" : ""
                   }`}
-                  onClick={() => setActiveLink(link.name)}
                 >
                   {link.name}
                 </Link>
@@ -44,17 +44,23 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Auth Buttons - Right Side */}
-        <div className="hidden lg:flex items-center space-x-4 ml-4 z-10">
-          <button className="px-6 py-2 text-green-800 font-medium hover:bg-green-100 rounded transition-colors">
+        {/* Auth Links - Desktop */}
+        <div className="hidden lg:flex items-center space-x-4 z-10">
+          <Link
+            to="/greenish/login"
+            className="px-6 py-2 text-green-800 font-medium hover:bg-green-100 rounded transition-colors"
+          >
             Login
-          </button>
-          <button className="px-6 py-2 bg-green-600 text-white font-medium hover:bg-green-700 rounded transition-colors">
+          </Link>
+          <Link
+            to="/greenish/register"
+            className="px-6 py-2 bg-green-600 text-white font-medium hover:bg-green-700 rounded transition-colors"
+          >
             Register
-          </button>
+          </Link>
         </div>
 
-        {/* Hamburger Menu - Right Side */}
+        {/* Hamburger Menu */}
         <button
           className="lg:hidden p-2 focus:outline-none z-10"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -71,41 +77,50 @@ const Header = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d={isMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
+              d={
+                isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"
+              }
             />
           </svg>
         </button>
       </div>
 
-      {/*Navigation - Mobile View */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-green-50 mt-2 p-4">
           <ul className="flex flex-col space-y-3">
             {navLinks.map((link) => (
-              <li key={link.name}>
+              <li key={link.name} className="w-full">
                 <Link
                   to={link.href}
                   className={`block px-4 py-2 text-green-900 font-medium rounded ${
-                    activeLink === link.name ? 'bg-green-200' : 'hover:bg-green-100'
+                    location.pathname === link.href
+                      ? "bg-green-200"
+                      : "hover:bg-green-100"
                   }`}
-                  onClick={() => {
-                    setActiveLink(link.name);
-                    setIsMenuOpen(false);
-                  }}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               </li>
             ))}
-            <li>
-              <button className="w-full px-4 py-2 mt-2 text-green-800 font-medium bg-green-100 hover:bg-green-200 rounded transition-colors">
+            <li className="w-full">
+              <Link
+                to="/greenish/login"
+                className="block w-full text-center px-4 py-2 mt-2 text-green-800 font-medium bg-green-100 hover:bg-green-200 rounded transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Login
-              </button>
+              </Link>
             </li>
-            <li>
-              <button className="w-full px-4 py-2 text-white bg-green-600 hover:bg-green-700 font-medium rounded transition-colors">
+            <li className="w-full">
+              <Link
+                to="/greenish/register"
+                className="block w-full text-center px-4 py-2 text-white bg-green-600 hover:bg-green-700 font-medium rounded transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
                 Register
-              </button>
+              </Link>
             </li>
           </ul>
         </div>

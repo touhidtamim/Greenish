@@ -57,7 +57,7 @@ const PlantCareSupport = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-4xl font-bold text-green-900 mb-3"
+            className="text-2xl md:text-4xl font-bold text-green-900 mb-3"
           >
             Your Personal Plant Care Team
           </motion.h2>
@@ -65,7 +65,7 @@ const PlantCareSupport = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-green-700 max-w-2xl mx-auto text-lg"
+            className="text-green-700 max-w-2xl mx-auto text-md md:text-lg"
           >
             From expert support to live workshops, we’re here to help your
             greens thrive.
@@ -80,7 +80,7 @@ const PlantCareSupport = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition-all border border-green-100"
+              className="bg-white p-4 md:p-6 rounded-xl shadow hover:shadow-lg transition-all border border-green-100"
             >
               <div className="flex items-center mb-4">
                 <div className="mr-4 p-2 bg-green-100 rounded-full">
@@ -169,7 +169,7 @@ const PlantCareSupport = () => {
         >
           <a
             href="#"
-            className="inline-block bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-all duration-300"
+            className="inline-block bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-semibold px-4 md:px-8 py-2 md:py-3 rounded-full shadow-lg transition-all duration-300"
           >
             🌱 Book a Plant Care Session
           </a>

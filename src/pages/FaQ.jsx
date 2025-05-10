@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import { Helmet } from "react-helmet-async";
 
 const FAQ = () => {
   const faqs = [
@@ -35,17 +36,31 @@ const FAQ = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12 text-green-900">
-      <h1 className="text-3xl font-bold mb-8 text-green-800">Frequently Asked Questions</h1>
-      <div className="space-y-6">
-        {faqs.map((faq, index) => (
-          <div key={index}>
-            <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
-            <p className="text-base text-green-800">{faq.answer}</p>
-          </div>
-        ))}
+    <>
+      <Helmet>
+        <title>
+          Greenish | FAQ - Your Plant Subscription Questions Answered
+        </title>
+        <meta
+          name="description"
+          content="Got questions? Visit our FAQ page for answers to your most common queries about Greenish subscription boxes, plant care, and more!"
+        />
+      </Helmet>
+
+      <div className="max-w-4xl mx-auto px-6 py-12 text-green-900">
+        <h1 className="text-3xl font-bold mb-8 text-green-800">
+          Frequently Asked Questions
+        </h1>
+        <div className="space-y-6">
+          {faqs.map((faq, index) => (
+            <div key={index}>
+              <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
+              <p className="text-base text-green-800">{faq.answer}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
