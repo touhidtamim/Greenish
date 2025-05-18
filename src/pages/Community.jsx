@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Helmet } from "react-helmet-async";
 import { FaStar } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const testimonials = [
   {
@@ -61,7 +62,7 @@ const testimonials = [
 
 const Community = () => {
   const [showAll, setShowAll] = useState(false);
-  const sectionRef = useRef(null); // ref for scrolling
+  const sectionRef = useRef(null);
   const visibleCards = showAll ? testimonials : testimonials.slice(0, 6);
 
   const handleToggle = () => {
@@ -69,6 +70,28 @@ const Community = () => {
       sectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
     setShowAll(!showAll);
+  };
+
+  const handleSubmitStory = () => {
+    Swal.fire({
+      title: "Share Your Green Story 🌿",
+      html: `
+    <p class="text-sm text-gray-600">
+      Tag <strong class="text-emerald-500">#GrowWithGreenish</strong> on social media <br />
+      or drop us a message — your growth inspires others.
+    </p>
+  `,
+      icon: "info",
+      confirmButtonText: "Inspire Others",
+      confirmButtonColor: "#10B981",
+      background: "#ffffff",
+      width: "28em",
+      customClass: {
+        popup: "rounded-xl shadow-md",
+        title: "text-emerald-600 text-xl font-semibold",
+        confirmButton: "text-sm px-4 py-2",
+      },
+    });
   };
 
   return (
@@ -151,7 +174,10 @@ const Community = () => {
               </span>{" "}
               on Instagram or Facebook and get featured!
             </p>
-            <button className="bg-emerald-500 hover:bg-emerald-600 hover:cursor-pointer text-white px-6 py-2 rounded-xl transition">
+            <button
+              onClick={handleSubmitStory}
+              className="bg-emerald-500 hover:bg-emerald-600 hover:cursor-pointer text-white px-6 py-2 rounded-xl transition"
+            >
               Submit Your Story
             </button>
           </div>

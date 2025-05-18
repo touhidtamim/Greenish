@@ -34,7 +34,7 @@ const HowItWorks = () => {
   return (
     <section className="py-20 bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc] relative overflow-hidden">
       <div className="container mx-auto px-4">
-        <p className="text-lg p-2 mx-auto rounded-full bg-blue-50 md:w-1/8 text-center text-green-700 font-semibold mb-2">
+        <p className="text-lg p-2 mx-auto rounded-full bg-blue-50 lg:w-1/8 text-center text-green-700 font-semibold mb-2">
           How It Works ?
         </p>
         <div className="text-center mb-16">
@@ -46,7 +46,7 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        {/* Progress Line (Desktop only) */}
+        {/* Progress Line */}
         <div className="relative max-w-4xl mx-auto mb-12 hidden md:block">
           <div className="absolute top-1/2 left-0 right-0 h-1 bg-gray-200 -translate-y-1/2 z-0 rounded"></div>
           <div
@@ -60,7 +60,7 @@ const HowItWorks = () => {
         </div>
 
         {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3 gap-12 md:gap-6 relative z-10">
           {steps.map((step, index) => (
             <div
               key={index}
@@ -91,7 +91,7 @@ const HowItWorks = () => {
           ))}
         </div>
 
-        {/* Mobile Progress Indicators */}
+        {/* Mobile */}
         <div className="flex justify-center gap-3 mt-12 md:hidden">
           {steps.map((_, index) => (
             <div
@@ -107,7 +107,6 @@ const HowItWorks = () => {
         </div>
       </div>
 
-      {/* Decorative Leaf (optional background icon) */}
       <div className="absolute bottom-0 right-0 opacity-10 transform translate-x-16 translate-y-16 scale-150 hidden md:block">
         🌿
       </div>

@@ -1,7 +1,43 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CTASection = () => {
+  const navigate = useNavigate();
+
+  const handleExploreClick = () => {
+    Swal.fire({
+      title: "Ready to subscribe?",
+      text: "Explore our plant subscription plans tailored to your lifestyle!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Let's Go!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/");
+      }
+    });
+  };
+
+  const handleHowItWorksClick = () => {
+    Swal.fire({
+      title: "How It Works 🌿",
+      html: `
+      <p style="font-size: 1rem; line-height: 1.5;">
+        🌱 Choose a subscription plan<br/>
+        📦 Receive hand-picked plants monthly<br/>
+        🧑‍🔧 Get expert care guides and tools<br/>
+        ❤️ Enjoy a greener, healthier space
+      </p>
+    `,
+      icon: "info",
+      confirmButtonColor: "#16a34a",
+      confirmButtonText: "Got it!",
+    });
+  };
+
   return (
     <section className="relative px-6 mt-5 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden">
@@ -30,20 +66,20 @@ const CTASection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
-              to="/greenish/services"
-              className="relative inline-flex items-center justify-center px-4 md:px-8 py-2 md:py-3 sm:py-4 overflow-hidden font-semibold text-white bg-green-600 rounded-full group hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-green-200/50"
+            <button
+              onClick={handleExploreClick}
+              className="relative cursor-pointer inline-flex items-center justify-center px-4 md:px-8 py-2 md:py-3 sm:py-4 overflow-hidden font-semibold text-white bg-green-600 rounded-full group hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-green-200/50"
             >
               <span className="relative z-10">Explore Subscription Plans</span>
               <span className="absolute -bottom-0 -right-0 w-full h-full bg-green-800 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"></span>
-            </Link>
+            </button>
 
-            <Link
-              to="/greenish/how-it-works"
-              className="relative inline-flex items-center justify-center px-4 md:px-8 py-2 md:py-3 overflow-hidden font-semibold text-green-700 border-2 border-green-600 rounded-full group hover:bg-green-50 transition-all duration-300"
+            <button
+              onClick={handleHowItWorksClick}
+              className="relative cursor-pointer inline-flex items-center justify-center px-4 md:px-8 py-2 md:py-3 overflow-hidden font-semibold text-green-700 border-2 border-green-600 rounded-full group hover:bg-green-50 transition-all duration-300"
             >
               <span className="relative z-10">How It Works →</span>
-            </Link>
+            </button>
           </div>
 
           <p className="mt-6 text-green-600 text-sm flex items-center justify-center gap-2">

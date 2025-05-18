@@ -1,5 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider ";
 
 const testimonials = [
   {
@@ -26,6 +28,32 @@ const testimonials = [
 ];
 
 const TestimonialSection = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleJoinClick = () => {
+    if (!user) {
+      Swal.fire({
+        title: "Oops! You’re almost there 🌱",
+        text: "Log in to join our plant-loving family and grow together.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "I’m In",
+        cancelButtonText: "Maybe Later",
+        confirmButtonColor: "#16a34a",
+        cancelButtonColor: "#94a3b8",
+        buttonsStyling: true,
+        focusConfirm: false,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/greenish/login");
+        }
+      });
+    } else {
+      navigate("/greenish/community");
+    }
+  };
+
   return (
     <section className="my-20 px-4 py-16 bg-gradient-to-br from-[#fbf8fc] via-white to-[#e2f9f6] rounded-3xl">
       <div className="max-w-6xl mx-auto text-center">
@@ -36,7 +64,7 @@ const TestimonialSection = () => {
           Discover how Greenish is growing happiness in homes across Bangladesh.
           Hear from our thriving community.
         </p>
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-2  lg:grid-cols-3 gap-10">
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
@@ -61,16 +89,16 @@ const TestimonialSection = () => {
         </div>
 
         <div className="mt-12">
-          <Link
-            to="/greenish/community"
-            className="relative inline-block bg-green-600 text-white font-medium px-8 py-3 rounded-full shadow-md group hover:shadow-lg hover:scale-105 transition"
+          <button
+            onClick={handleJoinClick}
+            className="relative cursor-pointer inline-block bg-green-600 text-white font-medium px-8 py-3 rounded-full shadow-md group hover:shadow-lg hover:scale-105 transition"
           >
             <span className="absolute inset-0 bg-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
             <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-full"></span>
             <span className="relative z-10 flex items-center justify-center gap-2">
               Join Our Plant Community 🌱
             </span>
-          </Link>
+          </button>
         </div>
       </div>
     </section>

@@ -1,29 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { AuthContext } from "../Provider/AuthProvider ";
 
 const Login = () => {
+  const { signInUser, googleSignIn } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
     if (!email || !password) {
       setError("Please fill in all fields");
       return;
     }
-    console.log("Login submitted:", { email, password });
-    // navigate("/dashboard");
+
+    try {
+      await signInUser(email, password);
+      navigate(location?.state || "/");
+    } catch (err) {
+      setError("Invalid email or password");
+      console.error(err.message);
+    }
   };
 
-  const handleGoogleLogin = () => {
-    console.log("Google login clicked");
-    // Google Auth logic here
+  const handleGoogleLogin = async () => {
+    try {
+      await googleSignIn();
+      navigate(location?.state || "/");
+    } catch (err) {
+      setError("Google login failed");
+      console.error(err.message);
+    }
   };
 
   return (
@@ -37,7 +52,6 @@ const Login = () => {
       </Helmet>
 
       <div className="min-h-screen mt-10 rounded-2xl bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc] py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-        {/* Login Card */}
         <div className="max-w-md mx-auto bg-white/90 backdrop-blur-md rounded-3xl shadow-xl overflow-hidden w-full">
           <div className="p-8 text-center">
             <h2 className="text-4xl font-extrabold text-emerald-700 mb-1">
@@ -63,13 +77,11 @@ const Login = () => {
                 </label>
                 <input
                   id="email"
-                  name="email"
                   type="email"
-                  placeholder="you@example.com"
-                  autoComplete="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@example.com"
                   className="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
                 />
               </div>
@@ -84,19 +96,20 @@ const Login = () => {
                 <div className="relative">
                   <input
                     id="password"
-                    name="password"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Enter your password"
-                    autoComplete="current-password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter your password"
                     className="mt-1 block w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
@@ -110,6 +123,15 @@ const Login = () => {
                 >
                   Login
                 </button>
+                <div className="text-left mt-2">
+                  <Link
+                    to="/greenish/forgot-password"
+                    state={{ email }}
+                    className="text-sm text-emerald-600 hover:underline"
+                  >
+                    Forgot password?
+                  </Link>
+                </div>
               </div>
             </form>
 

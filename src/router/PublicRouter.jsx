@@ -13,6 +13,8 @@ import TermsConditions from "../pages/TermsConditions";
 import Services from "../pages/Services";
 import MyProfile from "../pages/MyProfile";
 import ServiceDetails from "./../pages/ServiceDetails";
+import PrivateRouter from "./PrivateRouter";
+import ForgotPassword from "../pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -37,12 +39,20 @@ const router = createBrowserRouter([
 
       {
         path: "/services/:id",
-        element: <ServiceDetails></ServiceDetails>,
+        element: (
+          <PrivateRouter>
+            <ServiceDetails></ServiceDetails>
+          </PrivateRouter>
+        ),
       },
 
       {
         path: "/greenish/user-profile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRouter>
+            <MyProfile></MyProfile>
+          </PrivateRouter>
+        ),
       },
 
       {
@@ -52,7 +62,11 @@ const router = createBrowserRouter([
 
       {
         path: "/greenish/community",
-        element: <Community></Community>,
+        element: (
+          <PrivateRouter>
+            <Community></Community>
+          </PrivateRouter>
+        ),
       },
 
       {
@@ -73,6 +87,11 @@ const router = createBrowserRouter([
       {
         path: "/greenish/login",
         element: <Login></Login>,
+      },
+
+      {
+        path: "/greenish/forgot-password",
+        element: <ForgotPassword></ForgotPassword>,
       },
 
       {

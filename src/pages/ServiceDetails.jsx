@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { IoArrowBackOutline } from "react-icons/io5"; // Importing the back arrow icon from react-icons
+import { IoArrowBackOutline } from "react-icons/io5";
+import Swal from "sweetalert2";
 
 const ServiceDetails = () => {
   const location = useLocation();
@@ -9,6 +10,7 @@ const ServiceDetails = () => {
 
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
   const [submittedReviews, setSubmittedReviews] = useState([
     {
       name: "Afsana Rahman",
@@ -49,9 +51,16 @@ const ServiceDetails = () => {
 
   const handleSubmitReview = () => {
     if (!review || !rating || rating < 1 || rating > 5) {
-      alert("Please enter a review and a valid rating between 1 and 5.");
+      Swal.fire({
+        title: "Oops...",
+        text: "Please enter a review and a valid rating between 1 and 5.",
+        icon: "error",
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "OK",
+      });
       return;
     }
+
     const newReview = {
       name: "You",
       review,
@@ -61,17 +70,63 @@ const ServiceDetails = () => {
     setSubmittedReviews([newReview, ...submittedReviews]);
     setReview("");
     setRating("");
+
+    Swal.fire({
+      title: "Thank You!",
+      text: "Your review has been submitted successfully.",
+      icon: "success",
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "OK",
+    });
+  };
+
+  const handleSubscribe = () => {
+    Swal.fire({
+      title: `<span style="color:#2F855A">Subscribe to ${service.title}</span>`,
+      html: `
+    <p>Price: <strong style="color:#2F855A;">${service.price}</strong></p>
+    <p style="margin-top:6px; font-size:14px; color:#4A5568;">
+      Confirm to get started.
+    </p>
+  `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#38A169",
+      cancelButtonColor: "#E53E3E",
+      confirmButtonText: "Subscribe",
+      cancelButtonText: "Cancel",
+      customClass: {
+        popup: "rounded-lg shadow-lg",
+        confirmButton: "text-white px-4 py-2 rounded",
+        cancelButton: "px-4 py-2 rounded",
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsSubscribed(true);
+
+        Swal.fire({
+          title: `<span style="color:#2F855A">Subscribed!</span>`,
+          html: `<p>You're now subscribed to <strong>${service.title}</strong>.</p>`,
+          icon: "success",
+          confirmButtonColor: "#38A169",
+          confirmButtonText: "Awesome",
+          customClass: {
+            popup: "rounded-lg shadow-md",
+            confirmButton: "text-white px-4 py-2 rounded",
+          },
+        });
+      }
+    });
   };
 
   return (
     <section className="max-w-4xl mx-auto px-6 pb-12 rounded-xl shadow-lg mt-10">
-      {/* Go Back Button with Icon */}
       <div className="flex items-center mb-8">
         <button
           className="flex items-center px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out"
           onClick={() => navigate(-1)}
         >
-          <IoArrowBackOutline className="mr-2 text-xl" /> {/* Back Icon */}
+          <IoArrowBackOutline className="mr-2 text-xl" />
           Go Back
         </button>
       </div>
@@ -127,10 +182,21 @@ const ServiceDetails = () => {
       </div>
 
       <div className="flex justify-center mb-6">
-        <button className="relative cursor-pointer overflow-hidden px-6 py-3 rounded-lg bg-green-600 text-white font-medium group hover:scale-105 transition">
+        <button
+          onClick={handleSubscribe}
+          disabled={isSubscribed}
+          className={`relative overflow-hidden px-6 py-3 rounded-lg text-white font-medium group transition 
+            ${
+              isSubscribed
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-green-600 hover:scale-105"
+            }`}
+        >
           <span className="absolute inset-0 bg-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></span>
           <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-lg"></span>
-          <span className="relative z-10">Subscribe Now</span>
+          <span className="relative z-10">
+            {isSubscribed ? "Subscribed" : "Subscribe Now"}
+          </span>
         </button>
       </div>
 

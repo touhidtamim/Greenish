@@ -1,8 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { AuthContext } from "../Provider/AuthProvider ";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -13,31 +19,76 @@ const Register = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setError("");
+  const { googleSignIn } = useContext(AuthContext);
 
-    if (!/[A-Z]/.test(password)) {
-      setError("Password must include at least one UPPERCASE letter.");
-      return;
-    }
+  const auth = getAuth();
 
-    if (!/[a-z]/.test(password)) {
-      setError("Password must include at least one lowercase letter.");
-      return;
-    }
-
-    if (password.length < 6) {
-      setError("Password must be at least 6 characters long.");
-      return;
-    }
-
-    console.log("Registered:", { name, email, photoURL, password });
-    navigate("/login");
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
-  const handleGoogleRegister = () => {
-    console.log("Google register clicked");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let errors = "";
+
+    if (!name.trim()) {
+      errors = "Name is required.";
+    } else if (!photoURL.trim()) {
+      errors = "Photo URL is required.";
+    } else if (!validateEmail(email)) {
+      errors = "Please enter a valid email address.";
+    } else if (password.length < 6) {
+      errors = "Password must be at least 6 characters long.";
+    } else if (!/[A-Z]/.test(password)) {
+      errors = "Password must include at least one UPPERCASE letter.";
+    } else if (!/[a-z]/.test(password)) {
+      errors = "Password must include at least one lowercase letter.";
+    } else if (!/[0-9]/.test(password)) {
+      errors = "Password must include at least one number.";
+    }
+
+    if (errors) {
+      setError(errors);
+      return;
+    }
+
+    setError("");
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((result) => {
+        const user = result.user;
+
+        // Update user
+        updateProfile(user, {
+          displayName: name,
+          photoURL: photoURL,
+        })
+          .then(() => {
+            console.log("User registered & profile updated:", user);
+            setName("");
+            setEmail("");
+            setPassword("");
+            setPhotoURL("");
+            navigate("/");
+          })
+          .catch((err) => {
+            setError("Profile update failed: " + err.message);
+          });
+      })
+      .catch((error) => {
+        setError(error.message);
+      });
+  };
+
+  const handleGoogleRegister = async () => {
+    try {
+      const result = await googleSignIn();
+      const loggedUser = result.user;
+      console.log("Google user registered:", loggedUser);
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
@@ -66,13 +117,15 @@ const Register = () => {
               </div>
             )}
 
-            <form className="space-y-5" onSubmit={handleSubmit}>
+            <form className="space-y-5" onSubmit={handleSubmit} noValidate>
+              {/* Name */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Name
                 </label>
                 <input
                   type="text"
+                  name="name"
                   required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -81,12 +134,14 @@ const Register = () => {
                 />
               </div>
 
+              {/* photo url */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Photo URL
                 </label>
                 <input
-                  type="text"
+                  type="url"
+                  name="photoUrl"
                   required
                   value={photoURL}
                   onChange={(e) => setPhotoURL(e.target.value)}
@@ -95,12 +150,14 @@ const Register = () => {
                 />
               </div>
 
+              {/* Email */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Email
                 </label>
                 <input
                   type="email"
+                  name="email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -109,6 +166,7 @@ const Register = () => {
                 />
               </div>
 
+              {/* Password */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Password
@@ -116,6 +174,7 @@ const Register = () => {
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
+                    name="password"
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
@@ -123,13 +182,20 @@ const Register = () => {
                     className="mt-1 block w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
                   />
                   <button
-                    type="submit"
+                    type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                   >
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </button>
                 </div>
+                <p className="mt-2 text-xs text-gray-500 text-left">
+                  Password must be at least 6 characters, include uppercase,
+                  lowercase, and a number.
+                </p>
               </div>
 
               <div>
@@ -182,4 +248,5 @@ const Register = () => {
     </>
   );
 };
+
 export default Register;

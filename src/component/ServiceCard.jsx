@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import selectedServiceData from "../../public/Data/ServiceData";
+import Swal from "sweetalert2";
+import { AuthContext } from "../Provider/AuthProvider ";
 
 const ServiceCard = () => {
   const [filter, setFilter] = useState("All");
   const [visibleCount, setVisibleCount] = useState(6);
+  const [subscribedIds, setSubscribedIds] = useState([]);
+  const [shuffledServices, setShuffledServices] = useState([]);
+
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const allServices = [
     ...selectedServiceData.indoor,
@@ -12,11 +19,24 @@ const ServiceCard = () => {
     ...selectedServiceData.personalized,
   ];
 
+  useEffect(() => {
+    setShuffledServices(shuffleArray(allServices));
+  }, []);
+
+  const shuffleArray = (array) => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
+
   const getFilteredData = () => {
     if (filter === "Indoor") return selectedServiceData.indoor;
     if (filter === "Outdoor") return selectedServiceData.outdoor;
     if (filter === "Personalized") return selectedServiceData.personalized;
-    return allServices;
+    return shuffledServices;
   };
 
   const filteredData = getFilteredData();
@@ -35,6 +55,80 @@ const ServiceCard = () => {
     setVisibleCount(6);
     const section = document.getElementById("service-section");
     section?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSubscribe = (service) => {
+    if (!user) {
+      Swal.fire({
+        title: "Login Required",
+        text: "To subscribe, you need to log in first. Do you want to login now?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, Login",
+        cancelButtonText: "No, Cancel",
+        confirmButtonColor: "#2F855A",
+        cancelButtonColor: "#C53030",
+
+        background: "#f0fff4",
+        customClass: {
+          popup: "rounded-lg shadow-lg",
+          confirmButton: "text-white px-5 py-2 rounded",
+          cancelButton: "px-5 py-2 rounded",
+        },
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/greenish/login");
+        }
+      });
+      return;
+    }
+
+    if (subscribedIds.includes(service.id)) {
+      Swal.fire({
+        icon: "info",
+        title: "Already Subscribed",
+        text: `You have already subscribed to "${service.title}".`,
+        confirmButtonColor: "#38A169",
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: `<span style="color:#2F855A; font-weight:600; font-size:1.3rem;">Subscribe to ${service.title}?</span>`,
+      html: `
+        <p style="margin-bottom: 8px; font-size:1rem; color:#276749;">Price:</p>
+        <strong style="font-size:18px; color:#276749;">${service.price}</strong>
+      `,
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#38A169",
+      cancelButtonColor: "#E53E3E",
+      confirmButtonText: "Yes, subscribe!",
+      cancelButtonText: "Cancel",
+      customClass: {
+        popup: "rounded-lg shadow-lg",
+        confirmButton: "text-white px-5 py-2 rounded",
+        cancelButton: "px-5 py-2 rounded",
+      },
+      background: "#f0fff4",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setSubscribedIds((prev) => [...prev, service.id]);
+        Swal.fire({
+          icon: "success",
+          title: "Subscribed!",
+          html: `<div style="font-size:16px; color:#276749;">You have successfully subscribed to <strong>${service.title}</strong>.</div>`,
+          confirmButtonColor: "#276749",
+          timer: 1800,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          background: "#f0fff4",
+          customClass: {
+            popup: "rounded-lg shadow-lg",
+          },
+        });
+      }
+    });
   };
 
   return (
@@ -68,11 +162,11 @@ const ServiceCard = () => {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {visibleData.map((item) => (
           <div
             key={item.id}
-            className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-transform transform hover:-translate-y-1 duration-300 overflow-hidden"
+            className="bg-white rounded-2xl shadow-xs hover:shadow-2xl transition-transform transform duration-300 overflow-hidden"
           >
             <img
               src={item.image}
@@ -135,10 +229,34 @@ const ServiceCard = () => {
               </div>
 
               <div className="mt-4">
-                <button className="relative w-full overflow-hidden px-6 py-2 rounded-lg bg-green-700 text-white font-medium group hover:scale-105 transition">
-                  <span className="absolute inset-0 bg-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></span>
-                  <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-lg"></span>
-                  <span className="relative z-10">Subscribe Now</span>
+                <button
+                  onClick={() => handleSubscribe(item)}
+                  className={`relative w-full cursor-pointer overflow-hidden px-6 py-2 rounded-lg font-medium group transition-transform duration-300 ${
+                    subscribedIds.includes(item.id)
+                      ? "bg-green-600 text-white cursor-not-allowed opacity-70"
+                      : "bg-green-700 text-white hover:scale-105"
+                  }`}
+                  disabled={subscribedIds.includes(item.id)}
+                >
+                  <span
+                    className={`absolute inset-0 rounded-lg ${
+                      subscribedIds.includes(item.id)
+                        ? "bg-green-700 opacity-50"
+                        : "opacity-0 group-hover:opacity-100 bg-green-800 transition-opacity duration-300"
+                    }`}
+                  ></span>
+                  <span
+                    className={`absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform rounded-lg ${
+                      subscribedIds.includes(item.id)
+                        ? "translate-x-0 opacity-20"
+                        : "-translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out"
+                    }`}
+                  ></span>
+                  <span className="relative z-10">
+                    {subscribedIds.includes(item.id)
+                      ? "Subscribed ✓"
+                      : "Subscribe Now"}
+                  </span>
                 </button>
               </div>
             </div>
@@ -151,17 +269,17 @@ const ServiceCard = () => {
           {visibleCount < filteredData.length && (
             <button
               onClick={showMore}
-              className="relative overflow-hidden px-6 py-2 mx-2 rounded-lg bg-green-700 text-white font-medium group hover:scale-105 transition"
+              className="relative cursor-pointer overflow-hidden px-6 py-2 mx-2 rounded-lg bg-green-700 text-white font-medium group hover:scale-105 transition"
             >
-              <span className="absolute cursor-pointer inset-0 bg-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></span>
-              <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full cursor-pointer group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-lg"></span>
-              <span className="relative cursor-pointer z-10">Show More</span>
+              <span className="absolute inset-0 bg-green-800 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></span>
+              <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-lg"></span>
+              <span className="relative z-10">Show More</span>
             </button>
           )}
           {visibleCount > 6 && (
             <button
               onClick={showLess}
-              className="relative overflow-hidden cursor-pointer px-6 py-2 mx-2 rounded-lg bg-green-500 text-white font-medium group hover:scale-105 transition"
+              className="relative cursor-pointer overflow-hidden px-6 py-2 mx-2 rounded-lg bg-green-500 text-white font-medium group hover:scale-105 transition"
             >
               <span className="absolute inset-0 bg-green-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></span>
               <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-lg"></span>

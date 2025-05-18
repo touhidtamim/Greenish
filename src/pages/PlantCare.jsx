@@ -1,7 +1,45 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
+import MiniMessage from "../component/MiniMessage";
+import StaticReview from "../component/StaticReview";
+import CarePageCTA from "../component/CarePageCTA";
+import Offer from "../component/Offer";
 
 const PlantCare = () => {
+  const handleLearnMore = (topic) => {
+    let message = "";
+
+    switch (topic) {
+      case "Beginner's Guide":
+        message =
+          "Start your plant parenthood journey with easy steps from unboxing to nurturing!";
+        break;
+      case "Smart Watering":
+        message =
+          "Learn how to water your plants perfectly — not too much, not too little!";
+        break;
+      case "Light Mastery":
+        message =
+          "Discover the ideal light spots for your plants to keep them happy and healthy.";
+        break;
+      case "Advanced Care":
+        message =
+          "Master propagation, pruning, and repotting techniques like a pro.";
+        break;
+      default:
+        message = "Explore more plant care tips and tricks!";
+    }
+
+    Swal.fire({
+      title: topic,
+      text: message,
+      icon: "info",
+      confirmButtonText: "Got it!",
+      timer: 7000,
+    });
+  };
+
   return (
     <>
       <Helmet>
@@ -27,7 +65,6 @@ const PlantCare = () => {
             </p>
           </section>
 
-          {/* 4 cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {[
               {
@@ -62,120 +99,23 @@ const PlantCare = () => {
                   {tip.title}
                 </h3>
                 <p className="text-gray-600 mb-4">{tip.desc}</p>
-                <a
-                  href="#"
-                  className="text-emerald-600 font-medium inline-flex items-center group"
+                <button
+                  onClick={() => handleLearnMore(tip.title)}
+                  className="text-emerald-600 cursor-pointer font-medium inline-flex items-center group focus:outline-none"
                 >
                   Learn more
                   <span className="ml-1 transform group-hover:translate-x-1 transition-all duration-300">
                     →
                   </span>
-                </a>
+                </button>
               </div>
             ))}
           </div>
 
-          <div className="flex flex-col md:flex-row items-center bg-white rounded-2xl overflow-hidden shadow-lg mb-16">
-            <div className="md:w-1/2 p-8 md:p-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
-                Meet Your Personal Plant Coach
-              </h2>
-              <p className="text-gray-600 mb-6">
-                Every Greenish subscription includes access to our plant
-                experts. Text a photo of your plant and get personalized advice
-                within hours.
-              </p>
-              <ul className="space-y-3 mb-6">
-                {[
-                  "24/7 care reminders",
-                  "Seasonal care updates",
-                  "Troubleshooting help",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-center">
-                    <span className="bg-emerald-100 text-emerald-600 p-1 rounded-full mr-3">
-                      ✓
-                    </span>
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <button className="bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer px-6   py-1 md:py-3 rounded-full transition duration-300 ease-in-out transform hover:scale-105">
-                Try Free for 30 Days
-              </button>
-            </div>
-            <div className="w-full md:w-1/2 h-64 md:h-auto bg-emerald-50 flex items-center justify-center">
-              <img
-                src="https://i.ibb.co.com/HDG8HpMg/minicard.jpg"
-                alt="Plant care app interface"
-                className="h-full w-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Mini Message */}
-          <div className="bg-emerald-50 rounded-xl p-6 mb-16 text-center">
-            <p className="text-emerald-800 font-medium">
-              🌟 <span className="font-bold">Did You Know?</span> Our
-              subscribers have a 92% plant survival rate compared to the
-              industry average of 68%.
-            </p>
-          </div>
-
-          {/* Stories - Static */}
-          <div className="relative text-center mb-20 px-4">
-            <div className="absolute -top-10 left-10 w-28 h-28 bg-emerald-100 rounded-full opacity-20 blur-xl"></div>
-            <div className="absolute -bottom-10 right-10 w-36 h-36 bg-emerald-100 rounded-full opacity-20 blur-xl"></div>
-
-            <div className="relative max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-[#f0fdf4] border border-emerald-100 p-4 md:p-10 sm:p-12 rounded-3xl shadow-lg">
-              <h3 className="text-2xl md:text-3xl font-extrabold text-emerald-800 mb-4">
-                💚 Stories from Plant Lovers
-              </h3>
-              <p className="text-md md:text-lg sm:text-xl italic text-gray-700 leading-relaxed">
-                “Before{" "}
-                <span className="font-semibold text-emerald-600">Greenish</span>
-                , I kept killing my succulents. Now my room is a mini jungle —
-                and I’ve never felt more alive.”
-              </p>
-              <p className="mt-4 text-emerald-600 font-medium">
-                – Areeba, Dhaka
-              </p>
-            </div>
-          </div>
-
-          <div className="relative px-6 mt-10 overflow-hidden">
-            <div className="absolute inset-0">
-              <div className="absolute -top-12 left-10 w-36 h-36 bg-green-100 rounded-full opacity-20 blur-xl"></div>
-              <div className="absolute -bottom-12 right-10 w-48 h-48 bg-green-100 rounded-full opacity-20 blur-xl"></div>
-            </div>
-
-            <div className="relative max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-[#f0fdf4] p-10 sm:p-14 rounded-3xl shadow-xl border border-emerald-100 text-center">
-              <div className="text-5xl absolute top-6 left-6 text-green-200">
-                🌼
-              </div>
-              <div className="text-5xl absolute bottom-6 right-6 text-green-200">
-                🌿
-              </div>
-
-              <h3 className="text-2xl md:text-4xl font-extrabold text-emerald-800 mb-4">
-                Ready to Transform Your Space?
-              </h3>
-              <p className="text-md md:text-lg sm:text-xl text-gray-700 mb-8">
-                Join thousands of happy plant parents growing with confidence
-                every day.
-              </p>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <button className="relative inline-flex items-center justify-center px-4 md:px-8 py-2 md:py-3  overflow-hidden font-semibold text-white bg-emerald-600 rounded-full group hover:bg-emerald-700 transition-all duration-300 shadow-md hover:shadow-green-200/50 cursor-pointer">
-                  <span className="relative z-10">Start Your Journey</span>
-                  <span className="absolute -bottom-0 -right-0 w-full h-full bg-green-800 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500"></span>
-                </button>
-
-                <button className="relative inline-flex items-center justify-center px-4 md:px-8 py-2 md:py-3 overflow-hidden font-semibold text-emerald-700 border-2 border-emerald-600 rounded-full group hover:bg-green-50 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer">
-                  <span className="relative z-10">Learn More</span>
-                </button>
-              </div>
-            </div>
-          </div>
+          <Offer />
+          <MiniMessage />
+          <StaticReview />
+          <CarePageCTA />
         </div>
       </div>
     </>

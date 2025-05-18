@@ -11,8 +11,8 @@ const PlantCareMadeEasy = () => {
           hands.
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-          {/* Care Tip Card 1 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+          {/* Card 1 */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/watering.png"
@@ -27,7 +27,7 @@ const PlantCareMadeEasy = () => {
             </p>
           </div>
 
-          {/* Care Tip Card 2 */}
+          {/* Card 2 */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/large_sun.png"
@@ -43,7 +43,7 @@ const PlantCareMadeEasy = () => {
             </p>
           </div>
 
-          {/* Care Tip Card 3 */}
+          {/* Card 3 */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/support.png"
@@ -59,7 +59,7 @@ const PlantCareMadeEasy = () => {
             </p>
           </div>
 
-          {/* Care Tip Card 4 */}
+          {/* Card 4 */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/Group-Vector-PNG-Clipart.png"

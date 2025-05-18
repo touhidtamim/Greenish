@@ -6,7 +6,7 @@ const selectedServiceData = {
       category: "Indoor",
       description: "A set of air purifying plants that thrive in low light.",
       image: "https://i.postimg.cc/Kct5cwR8/c01.webp",
-      price: "$15",
+      price: "৳3600",
       frequency: "Monthly",
       benefits: [
         "Improves air quality",
@@ -29,7 +29,7 @@ const selectedServiceData = {
       description:
         "A complete bonsai kit with Ficus tree and tools for trimming.",
       image: "https://i.postimg.cc/fyWkNVVX/c2.webp",
-      price: "$20",
+      price: "৳3100",
       frequency: "Monthly",
       benefits: ["Bonsai tree", "Pruning scissors", "Aesthetic pot"],
       reviewCount: 150,
@@ -48,7 +48,7 @@ const selectedServiceData = {
       description:
         "A compact indoor herb garden with essential herbs for cooking.",
       image: "https://i.postimg.cc/TPXdxKSw/c3.jpg",
-      price: "$18",
+      price: "৳2900",
       frequency: "Monthly",
       benefits: [
         "Basil, mint, and parsley",
@@ -71,7 +71,7 @@ const selectedServiceData = {
       description:
         "A kit for orchid lovers with plants and necessary care tools.",
       image: "https://i.postimg.cc/tJ1QWbfw/c4.jpg",
-      price: "$25",
+      price: "৳3700",
       frequency: "Monthly",
       benefits: ["1 Orchid plant", "Orchid fertilizer", "Pruning tools"],
       reviewCount: 100,
@@ -91,7 +91,7 @@ const selectedServiceData = {
       description:
         "A perfect kit to start your succulent collection with 3 different types.",
       image: "https://i.postimg.cc/qRyZT7Pk/IMG-0269-edit.jpg",
-      price: "$22",
+      price: "৳3400",
       frequency: "Monthly",
       benefits: [
         "3 unique succulents",
@@ -116,7 +116,7 @@ const selectedServiceData = {
       description:
         "Includes a variety of seasonal flowers and organic fertilizer.",
       image: "https://i.postimg.cc/3wHvqJFj/June-1A.jpg",
-      price: "$25",
+      price: "৳4900",
       frequency: "Monthly",
       benefits: [
         "Variety of seasonal flowers",
@@ -140,7 +140,7 @@ const selectedServiceData = {
       description: "A set of tropical plants for your garden, with care tools.",
       image:
         "https://i.postimg.cc/mZNB3ZPf/tropical-garden-lush-sanctuary-1014-m.jpg",
-      price: "$30",
+      price: "৳5300",
       frequency: "Monthly",
       benefits: ["3 tropical plants", "Fertilizer", "Watering tools"],
       reviewCount: 180,
@@ -159,7 +159,7 @@ const selectedServiceData = {
       description:
         "A curated selection of flowering shrubs to brighten up your garden.",
       image: "https://i.postimg.cc/W31691sW/00-cover-1200x630.png",
-      price: "$40",
+      price: "৳4600",
       frequency: "Monthly",
       benefits: ["3 flowering shrubs", "Organic compost", "Pruning tools"],
       reviewCount: 130,
@@ -178,7 +178,7 @@ const selectedServiceData = {
       description:
         "A selection of organic vegetable plants for outdoor gardens.",
       image: "https://i.postimg.cc/3xpTRK5c/vegetable-garden-ideas-1.png",
-      price: "$35",
+      price: "৳4800",
       frequency: "Monthly",
       benefits: ["5 organic vegetable plants", "Compost", "Organic fertilizer"],
       reviewCount: 220,
@@ -196,7 +196,7 @@ const selectedServiceData = {
       category: "Outdoor",
       description: "A kit to grow a variety of culinary herbs outdoors.",
       image: "https://i.postimg.cc/LXz5ZrYH/8420-herbs-in-standing-garden.jpg",
-      price: "$20",
+      price: "৳4200",
       frequency: "Monthly",
       benefits: ["5 herb plants", "Organic soil", "Watering can"],
       reviewCount: 200,
@@ -217,7 +217,7 @@ const selectedServiceData = {
       description:
         "A personalized garden kit tailored to your preferred plant types.",
       image: "https://i.postimg.cc/9Xg5YLdV/beautiful-garden.jpg",
-      price: "$50",
+      price: "৳7200",
       frequency: "Monthly",
       benefits: [
         "Customized plant selection",
@@ -241,7 +241,7 @@ const selectedServiceData = {
       description:
         "A personalized succulent collection that matches your home décor.",
       image: "https://i.postimg.cc/BbP0KFw2/cover-copy.jpg",
-      price: "$28",
+      price: "৳8900",
       frequency: "Monthly",
       benefits: [
         "Unique succulent varieties",
@@ -265,7 +265,7 @@ const selectedServiceData = {
       description:
         "A subscription that delivers personalized flower arrangements based on your preferences.",
       image: "https://i.postimg.cc/DZZF7Hrj/519235318-H.jpg",
-      price: "$40",
+      price: "৳6400",
       frequency: "Monthly",
       benefits: [
         "Handpicked flowers",
@@ -289,7 +289,7 @@ const selectedServiceData = {
       description:
         "A personalized orchid care package with care instructions and selected orchid varieties.",
       image: "https://i.postimg.cc/JzYCPPVj/pink-orchid.jpg",
-      price: "$45",
+      price: "৳8700",
       frequency: "Monthly",
       benefits: [
         "Selected orchids based on your preferences",
@@ -312,7 +312,7 @@ const selectedServiceData = {
       description:
         "A customized kit to grow your preferred herbs based on your cooking style.",
       image: "https://i.postimg.cc/MTk4FLsf/herb-garden.jpg",
-      price: "$30",
+      price: "৳8300",
       frequency: "Monthly",
       benefits: [
         "Custom herb selection",
