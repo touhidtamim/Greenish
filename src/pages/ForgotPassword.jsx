@@ -12,6 +12,7 @@ const ForgotPassword = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  // Handle sending password reset email via Firebase
   const handleResetPassword = async (e) => {
     e.preventDefault();
     setMessage("");
@@ -20,6 +21,7 @@ const ForgotPassword = () => {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage("Password reset email sent! Please check your inbox.");
+      // Open Gmail in new tab for convenience
       window.open("https://mail.google.com", "_blank");
     } catch (err) {
       console.error("Reset Error:", err);
@@ -27,12 +29,14 @@ const ForgotPassword = () => {
     }
   };
 
+  // Navigate back to home page
   const handleBack = () => {
     navigate("/");
   };
 
   return (
     <>
+      {/* SEO setup */}
       <Helmet>
         <title>Greenish | Reset Password</title>
         <meta
@@ -41,8 +45,10 @@ const ForgotPassword = () => {
         />
       </Helmet>
 
+      {/* Centered container with subtle background gradient */}
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f9fefc] via-[#f6f8fb] to-[#f9fefc] py-10 px-6">
         <div className="max-w-md w-full bg-white/90 backdrop-blur-lg rounded-3xl shadow-xl p-8 text-center">
+          {/* Heading */}
           <h2 className="text-4xl font-extrabold text-emerald-700 mb-2">
             Reset Password 🌱
           </h2>
@@ -50,6 +56,7 @@ const ForgotPassword = () => {
             Enter your email and we’ll send you a password reset link.
           </p>
 
+          {/* Success and error messages */}
           {message && (
             <p className="my-5 text-sm bg-stone-100 text-green-800 font-medium">
               {message}
@@ -61,6 +68,7 @@ const ForgotPassword = () => {
             </p>
           )}
 
+          {/* Password reset form */}
           <form onSubmit={handleResetPassword} className="space-y-6">
             <div>
               <label
@@ -88,7 +96,7 @@ const ForgotPassword = () => {
             </button>
           </form>
 
-          {/* Back Button */}
+          {/* Back button */}
           <button
             onClick={handleBack}
             className="mt-4 text-emerald-600 hover:underline text-md font-medium"

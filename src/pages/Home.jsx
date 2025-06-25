@@ -9,6 +9,7 @@ import ServiceCard from "../component/ServiceCard";
 const Home = () => {
   return (
     <>
+      {/* SEO meta tags */}
       <Helmet>
         <title>
           Greenish | Home - Your Personalized Subscription Box for Plant Care
@@ -19,15 +20,12 @@ const Home = () => {
         />
       </Helmet>
 
-      <Slider></Slider>
-
-      <ServiceCard></ServiceCard>
-
-      <PlantCareMadeEasy></PlantCareMadeEasy>
-
-      <TestimonialsSection></TestimonialsSection>
-
-      <FinalCTA></FinalCTA>
+      {/* Main homepage components */}
+      <Slider />
+      <ServiceCard />
+      <PlantCareMadeEasy />
+      <TestimonialsSection />
+      <FinalCTA />
     </>
   );
 };

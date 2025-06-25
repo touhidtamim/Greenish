@@ -2,6 +2,7 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const FAQ = () => {
+  // FAQ data: list of common questions and answers
   const faqs = [
     {
       question: "What is Greenish?",
@@ -37,6 +38,7 @@ const FAQ = () => {
 
   return (
     <>
+      {/* SEO setup */}
       <Helmet>
         <title>
           Greenish | FAQ - Your Plant Subscription Questions Answered
@@ -47,10 +49,14 @@ const FAQ = () => {
         />
       </Helmet>
 
+      {/* Container */}
       <div className="max-w-4xl mx-auto px-6 py-12 text-green-900">
+        {/* Page heading */}
         <h1 className="text-3xl font-bold mb-8 text-green-800">
           Frequently Asked Questions
         </h1>
+
+        {/* FAQ list */}
         <div className="space-y-6">
           {faqs.map((faq, index) => (
             <div key={index}>

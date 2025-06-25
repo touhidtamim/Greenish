@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider ";
 
-const Header = () => {
+const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -39,6 +39,7 @@ const Header = () => {
     "https://i.postimg.cc/qB6MfzWf/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg";
 
   if (!isClient) {
+    // Render minimal header during SSR or before client mount
     return (
       <header className="p-4 bg-white shadow relative">
         <div className="container mx-auto flex items-center justify-between">
@@ -49,7 +50,7 @@ const Header = () => {
               className="h-10 w-auto"
             />
           </Link>
-          <div className="h-10 w-10"></div>{" "}
+          <div className="h-10 w-10"></div>
         </div>
       </header>
     );
@@ -67,7 +68,7 @@ const Header = () => {
           />
         </Link>
 
-        {/* Main Navigation */}
+        {/* Desktop Navigation */}
         <nav className="hidden lg:flex flex-grow justify-center mx-4">
           <ul className="flex space-x-4">
             {commonLinks.map((link) => (
@@ -98,7 +99,7 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Auth Section */}
+        {/* Desktop Auth Section */}
         <div className="hidden lg:flex items-center space-x-4 z-10">
           {user ? (
             <>
@@ -185,7 +186,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Content */}
+      {/* Mobile Menu */}
       {isMenuOpen && (
         <div className="lg:hidden bg-green-50 mt-2 p-4">
           <ul className="flex flex-col space-y-3">
@@ -261,4 +262,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

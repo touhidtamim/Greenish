@@ -15,6 +15,8 @@ import {
 
 const ProfilePage = () => {
   const { user, setLoading } = useContext(AuthContext);
+
+  // Local states for edit mode, temp inputs, loading, and messages
   const [editMode, setEditMode] = useState(false);
   const [tempName, setTempName] = useState(user?.displayName || "");
   const [tempPhotoURL, setTempPhotoURL] = useState(user?.photoURL || "");
@@ -23,6 +25,7 @@ const ProfilePage = () => {
   const [success, setSuccess] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
+  // Save updated profile info to Firebase
   const handleSave = async () => {
     if (!user) return;
 
@@ -52,6 +55,7 @@ const ProfilePage = () => {
     }
   };
 
+  // Reset form fields and exit edit mode
   const resetForm = () => {
     setTempName(user?.displayName || "");
     setTempPhotoURL(user?.photoURL || "");
@@ -69,7 +73,7 @@ const ProfilePage = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="min-h-screen bg-gradient-to-br from-[#fbf8fc] via-white to-[#e2f9f6]  flex items-center justify-center lg:p-4"
+        className="min-h-screen bg-gradient-to-br from-[#fbf8fc] via-white to-[#e2f9f6] flex items-center justify-center lg:p-4"
       >
         <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-8 overflow-hidden">
           <motion.div
@@ -81,6 +85,7 @@ const ProfilePage = () => {
               My Profile
             </h2>
 
+            {/* Profile Image */}
             <div className="relative flex justify-center mb-6 group">
               <div
                 className="relative cursor-pointer"
@@ -102,7 +107,7 @@ const ProfilePage = () => {
               </div>
             </div>
 
-            {/* Success/Error Messages */}
+            {/* Error / Success Messages */}
             {error && (
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
@@ -143,7 +148,7 @@ const ProfilePage = () => {
               )}
             </div>
 
-            {/* PhotoURL Field */}
+            {/* Photo URL Input (Edit Mode) */}
             {editMode && (
               <motion.div
                 initial={{ opacity: 0, height: 0 }}
@@ -164,7 +169,7 @@ const ProfilePage = () => {
               </motion.div>
             )}
 
-            {/* Email Field */}
+            {/* Email Display */}
             <div className="mb-6">
               <label className="flex items-center text-gray-700 font-medium mb-2">
                 <FiMail className="mr-2" />
@@ -216,7 +221,7 @@ const ProfilePage = () => {
         </div>
       </motion.div>
 
-      {/* Enlarge Image Modal */}
+      {/* Enlarged Profile Image Modal */}
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -224,7 +229,7 @@ const ProfilePage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setShowModal(false)} // Close on outside click
+            onClick={() => setShowModal(false)} // Close modal on outside click
           >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
@@ -232,7 +237,7 @@ const ProfilePage = () => {
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.3 }}
               className="relative"
-              onClick={(e) => e.stopPropagation()} // Prevent click from bubbling
+              onClick={(e) => e.stopPropagation()} // Prevent modal close on inner click
             >
               <img
                 src={
@@ -245,6 +250,7 @@ const ProfilePage = () => {
               <button
                 onClick={() => setShowModal(false)}
                 className="absolute -top-4 -right-4 bg-white rounded-full p-1 shadow-md hover:bg-red-100 transition"
+                aria-label="Close enlarged image"
               >
                 <FiXCircle className="text-red-500 text-2xl" />
               </button>

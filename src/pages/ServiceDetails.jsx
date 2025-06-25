@@ -8,6 +8,7 @@ const ServiceDetails = () => {
   const navigate = useNavigate();
   const { service } = location.state || {};
 
+  // States for review input, rating, subscription status, and submitted reviews list
   const [review, setReview] = useState("");
   const [rating, setRating] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -35,6 +36,7 @@ const ServiceDetails = () => {
     },
   ]);
 
+  // Handle case when service data is missing
   if (!service) {
     return (
       <div className="text-center py-20">
@@ -49,6 +51,7 @@ const ServiceDetails = () => {
     );
   }
 
+  // Validate and submit new review
   const handleSubmitReview = () => {
     if (!review || !rating || rating < 1 || rating > 5) {
       Swal.fire({
@@ -80,15 +83,16 @@ const ServiceDetails = () => {
     });
   };
 
+  // Confirm subscription via SweetAlert and update state
   const handleSubscribe = () => {
     Swal.fire({
       title: `<span style="color:#2F855A">Subscribe to ${service.title}</span>`,
       html: `
-    <p>Price: <strong style="color:#2F855A;">${service.price}</strong></p>
-    <p style="margin-top:6px; font-size:14px; color:#4A5568;">
-      Confirm to get started.
-    </p>
-  `,
+        <p>Price: <strong style="color:#2F855A;">${service.price}</strong></p>
+        <p style="margin-top:6px; font-size:14px; color:#4A5568;">
+          Confirm to get started.
+        </p>
+      `,
       icon: "question",
       showCancelButton: true,
       confirmButtonColor: "#38A169",
@@ -103,7 +107,6 @@ const ServiceDetails = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         setIsSubscribed(true);
-
         Swal.fire({
           title: `<span style="color:#2F855A">Subscribed!</span>`,
           html: `<p>You're now subscribed to <strong>${service.title}</strong>.</p>`,
@@ -121,16 +124,19 @@ const ServiceDetails = () => {
 
   return (
     <section className="max-w-4xl mx-auto px-6 pb-12 rounded-xl shadow-lg mt-10">
+      {/* Back button */}
       <div className="flex items-center mb-8">
         <button
           className="flex items-center px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all duration-300 ease-in-out"
           onClick={() => navigate(-1)}
+          aria-label="Go Back"
         >
           <IoArrowBackOutline className="mr-2 text-xl" />
           Go Back
         </button>
       </div>
 
+      {/* Header section */}
       <div className="text-center rounded-xl py-4 bg-gradient-to-br from-green-100 via-green-50 to-green-100 mb-8">
         <h1 className="text-2xl md:text-5xl font-bold text-green-800 mb-3">
           Service Details
@@ -140,17 +146,20 @@ const ServiceDetails = () => {
         </p>
       </div>
 
+      {/* Service image */}
       <img
         src={service.image}
         alt={service.title}
         className="w-full h-64 object-cover rounded-md mb-6"
       />
 
+      {/* Title and description */}
       <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-2">
         {service.title}
       </h2>
       <p className="text-lg text-gray-600 mb-6">{service.description}</p>
 
+      {/* Included items and subscription benefits */}
       <div className="grid md:grid-cols-2 gap-8 mb-6">
         {[
           ["What's Included:", service.benefits],
@@ -169,11 +178,13 @@ const ServiceDetails = () => {
         ))}
       </div>
 
+      {/* Recommendation */}
       <p className="text-md text-green-700 font-medium italic mb-8">
         <span className="font-semibold">Recommendation:</span>{" "}
         {service.recommendation}
       </p>
 
+      {/* Pricing and delivery frequency */}
       <div className="flex justify-between items-center mb-8">
         <p className="text-xl font-bold text-green-800">{service.price}</p>
         <p className="text-sm text-gray-500">
@@ -181,6 +192,7 @@ const ServiceDetails = () => {
         </p>
       </div>
 
+      {/* Subscribe button */}
       <div className="flex justify-center mb-6">
         <button
           onClick={handleSubscribe}
@@ -191,6 +203,7 @@ const ServiceDetails = () => {
                 ? "bg-gray-400 cursor-not-allowed"
                 : "bg-green-600 hover:scale-105"
             }`}
+          aria-disabled={isSubscribed}
         >
           <span className="absolute inset-0 bg-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></span>
           <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-lg"></span>
@@ -200,11 +213,13 @@ const ServiceDetails = () => {
         </button>
       </div>
 
+      {/* Reviews Section */}
       <div className="border-t border-gray-200 pt-8 mt-12">
         <h3 className="text-2xl md:text-4xl text-center rounded-xl py-4 md:py-8 bg-gradient-to-br from-green-100 via-green-50 to-green-100 font-bold text-green-700 mb-6">
           Customer Reviews
         </h3>
 
+        {/* List existing reviews or show no reviews message */}
         {submittedReviews.length > 0 ? (
           <div className="space-y-6 mb-10 p-6 rounded-xl">
             {submittedReviews.map((item, idx) => (
@@ -243,6 +258,7 @@ const ServiceDetails = () => {
           </div>
         )}
 
+        {/* New review submission form */}
         <div className="border p-6 rounded-xl">
           <h4 className="text-lg font-semibold text-green-800 mb-4">
             Share your experience
@@ -261,6 +277,7 @@ const ServiceDetails = () => {
                   className={`text-2xl ${
                     rating >= star ? "text-yellow-400" : "text-gray-300"
                   } hover:text-yellow-400`}
+                  aria-label={`Rate ${star} star${star > 1 ? "s" : ""}`}
                 >
                   ★
                 </button>
@@ -276,6 +293,7 @@ const ServiceDetails = () => {
             onChange={(e) => setReview(e.target.value)}
             placeholder="How was your experience with this service?"
             className="w-full border border-green-200 rounded-lg p-4 h-32 resize-none focus:ring-2 focus:ring-green-500"
+            aria-label="Write your review"
           />
 
           <div className="flex justify-center mt-4">

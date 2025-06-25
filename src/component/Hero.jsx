@@ -1,7 +1,0 @@
-import React from "react";
-
-const Hero = () => {
-  return <div>This is Hero Component</div>;
-};
-
-export default Hero;

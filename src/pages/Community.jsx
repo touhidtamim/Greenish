@@ -65,6 +65,7 @@ const Community = () => {
   const sectionRef = useRef(null);
   const visibleCards = showAll ? testimonials : testimonials.slice(0, 6);
 
+  // Toggle between showing all or limited testimonials, smooth scroll on collapse
   const handleToggle = () => {
     if (showAll && sectionRef.current) {
       sectionRef.current.scrollIntoView({ behavior: "smooth" });
@@ -72,15 +73,16 @@ const Community = () => {
     setShowAll(!showAll);
   };
 
+  // Show modal prompting users to share their green stories
   const handleSubmitStory = () => {
     Swal.fire({
       title: "Share Your Green Story 🌿",
       html: `
-    <p class="text-sm text-gray-600">
-      Tag <strong class="text-emerald-500">#GrowWithGreenish</strong> on social media <br />
-      or drop us a message — your growth inspires others.
-    </p>
-  `,
+        <p class="text-sm text-gray-600">
+          Tag <strong class="text-emerald-500">#GrowWithGreenish</strong> on social media <br />
+          or drop us a message — your growth inspires others.
+        </p>
+      `,
       icon: "info",
       confirmButtonText: "Inspire Others",
       confirmButtonColor: "#10B981",
@@ -96,6 +98,7 @@ const Community = () => {
 
   return (
     <>
+      {/* SEO meta tags */}
       <Helmet>
         <title>
           Greenish | #GrowWithGreenish - Join Our Plant Lover Community
@@ -108,16 +111,20 @@ const Community = () => {
 
       <div className="bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc]">
         <div className="max-w-6xl mx-auto px-4 py-12">
+          {/* Page title */}
           <h1 className="text-3xl md:text-4xl md:text-5xl font-bold text-emerald-600 text-center mb-6">
             Meet Our Greenish Family 🌿
           </h1>
-          <p className="text:md md:text-lg text-gray-700 text-center max-w-3xl mx-auto mb-12">
+
+          {/* Intro paragraph */}
+          <p className="text-md md:text-lg text-gray-700 text-center max-w-3xl mx-auto mb-12">
             Greenish isn’t just about plants — it’s about people. Our community
             is made of everyday plant lovers, families, students, and dreamers
             who find peace and joy through greenery. Here’s how they grow with
             us.
           </p>
 
+          {/* Testimonials grid */}
           <div
             ref={sectionRef}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10"
@@ -154,6 +161,7 @@ const Community = () => {
             ))}
           </div>
 
+          {/* Show more/less button */}
           <div className="text-center mb-12 md:mb-16">
             <button
               onClick={handleToggle}
@@ -163,6 +171,7 @@ const Community = () => {
             </button>
           </div>
 
+          {/* Call to action for sharing stories */}
           <div className="text-center my-10 md:my-16 mb-12">
             <h2 className="text-2xl md:text-3xl font-bold text-emerald-600 mb-4">
               Share Your Green Corner 📸
@@ -182,6 +191,7 @@ const Community = () => {
             </button>
           </div>
 
+          {/* Community message */}
           <div className="text-center max-w-3xl mx-auto">
             <h3 className="text-xl md:text-2xl font-semibold text-emerald-600 mb-2">
               Together, We’re Growing More Than Plants.

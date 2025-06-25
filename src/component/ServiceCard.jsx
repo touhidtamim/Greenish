@@ -4,25 +4,29 @@ import selectedServiceData from "../../public/Data/ServiceData";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider ";
 
+// ServiceCard component displays plant subscription services with filtering, subscription, and pagination
 const ServiceCard = () => {
-  const [filter, setFilter] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(6);
-  const [subscribedIds, setSubscribedIds] = useState([]);
-  const [shuffledServices, setShuffledServices] = useState([]);
+  const [filter, setFilter] = useState("All"); // Current filter category
+  const [visibleCount, setVisibleCount] = useState(6); // Number of visible items
+  const [subscribedIds, setSubscribedIds] = useState([]); // IDs of subscribed services
+  const [shuffledServices, setShuffledServices] = useState([]); // Shuffled list for "All"
 
-  const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext); // Authenticated user
   const navigate = useNavigate();
 
+  // Combine all services into one array
   const allServices = [
     ...selectedServiceData.indoor,
     ...selectedServiceData.outdoor,
     ...selectedServiceData.personalized,
   ];
 
+  // Shuffle services on mount for random "All" view
   useEffect(() => {
     setShuffledServices(shuffleArray(allServices));
   }, []);
 
+  // Fisher-Yates shuffle algorithm
   const shuffleArray = (array) => {
     const shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -32,6 +36,7 @@ const ServiceCard = () => {
     return shuffled;
   };
 
+  // Get services filtered by current category or all shuffled
   const getFilteredData = () => {
     if (filter === "Indoor") return selectedServiceData.indoor;
     if (filter === "Outdoor") return selectedServiceData.outdoor;
@@ -40,23 +45,27 @@ const ServiceCard = () => {
   };
 
   const filteredData = getFilteredData();
-  const visibleData = filteredData.slice(0, visibleCount);
+  const visibleData = filteredData.slice(0, visibleCount); // Items currently visible
 
+  // Change filter and reset visible count
   const handleFilterChange = (category) => {
     setFilter(category);
     setVisibleCount(6);
   };
 
+  // Show more items
   const showMore = () => {
     setVisibleCount((prev) => prev + 6);
   };
 
+  // Show less items and scroll to section top
   const showLess = () => {
     setVisibleCount(6);
     const section = document.getElementById("service-section");
     section?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Handle subscribing to a service with login and confirmation dialogs
   const handleSubscribe = (service) => {
     if (!user) {
       Swal.fire({
@@ -68,7 +77,6 @@ const ServiceCard = () => {
         cancelButtonText: "No, Cancel",
         confirmButtonColor: "#2F855A",
         cancelButtonColor: "#C53030",
-
         background: "#f0fff4",
         customClass: {
           popup: "rounded-lg shadow-lg",
@@ -136,6 +144,7 @@ const ServiceCard = () => {
       id="service-section"
       className="mt-6 py-16 rounded-xl px-4 bg-gradient-to-br from-[#fbf8fc] via-white to-[#e2f9f6]"
     >
+      {/* Section header */}
       <div className="text-center mb-12">
         <h2 className="text-3xl md:text-4xl font-extrabold text-green-800">
           Explore Our Plant Subscriptions
@@ -146,6 +155,7 @@ const ServiceCard = () => {
         </p>
       </div>
 
+      {/* Filter buttons */}
       <div className="text-center mb-10 flex flex-wrap justify-center gap-3">
         {["All", "Indoor", "Outdoor", "Personalized"].map((category) => (
           <button
@@ -162,6 +172,7 @@ const ServiceCard = () => {
         ))}
       </div>
 
+      {/* Service cards grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
         {visibleData.map((item) => (
           <div
@@ -228,6 +239,7 @@ const ServiceCard = () => {
                 </Link>
               </div>
 
+              {/* Subscribe button */}
               <div className="mt-4">
                 <button
                   onClick={() => handleSubscribe(item)}
@@ -264,6 +276,7 @@ const ServiceCard = () => {
         ))}
       </div>
 
+      {/* Pagination buttons */}
       {filteredData.length > 6 && (
         <div className="text-center mt-12">
           {visibleCount < filteredData.length && (

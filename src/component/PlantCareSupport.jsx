@@ -8,6 +8,7 @@ import BookingButton from "../component/BookingButton";
 import FloatingCallButton from "../component/FloatingCallButton";
 
 const PlantCareSupport = () => {
+  // Support services data with icons, titles, and descriptions
   const supportServices = [
     {
       icon: <PhoneCall className="text-green-600" size={30} />,
@@ -31,6 +32,7 @@ const PlantCareSupport = () => {
     },
   ];
 
+  // Memoized workshop schedule with dates, topics, and times
   const workshopSchedule = useMemo(() => {
     const baseDate = new Date();
     const topics = [
@@ -41,6 +43,7 @@ const PlantCareSupport = () => {
       "Composting Made Easy",
     ];
 
+    // Generate 4 upcoming workshop entries spaced 15 days apart
     return Array.from({ length: 4 }, (_, i) => {
       const futureDate = new Date(baseDate);
       futureDate.setDate(baseDate.getDate() + 15 * (i + 1));
@@ -56,6 +59,7 @@ const PlantCareSupport = () => {
   return (
     <section className="py-16 bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc]">
       <div className="container mx-auto px-4">
+        {/* Section Header with animation */}
         <div className="text-center mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -76,6 +80,7 @@ const PlantCareSupport = () => {
           </motion.p>
         </div>
 
+        {/* Support services cards with staggered animation */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {supportServices.map((service, index) => (
             <motion.div
@@ -90,11 +95,17 @@ const PlantCareSupport = () => {
           ))}
         </div>
 
+        {/* Workshop schedule table */}
         <WorkshopTable schedule={workshopSchedule} />
+
+        {/* Testimonials section */}
         <TestimonialSection />
+
+        {/* Booking call-to-action button */}
         <BookingButton />
       </div>
 
+      {/* Floating call button for quick contact */}
       <FloatingCallButton />
     </section>
   );

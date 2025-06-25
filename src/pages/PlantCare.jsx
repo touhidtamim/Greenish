@@ -54,6 +54,7 @@ const PlantCare = () => {
 
       <div className="bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc] py-16 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
+          {/* Header Section */}
           <section className="text-center mb-20">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-emerald-700 mb-4">
               Plant Care, the Greenish Way 🌿
@@ -65,6 +66,7 @@ const PlantCare = () => {
             </p>
           </section>
 
+          {/* Tips Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
             {[
               {
@@ -112,6 +114,7 @@ const PlantCare = () => {
             ))}
           </div>
 
+          {/* Additional Components */}
           <Offer />
           <MiniMessage />
           <StaticReview />

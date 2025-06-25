@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 const Contact = () => {
   return (
     <>
+      {/* SEO setup for Contact page */}
       <Helmet>
         <title>Greenish | Contact Us - We're Here to Help You Grow</title>
         <meta
@@ -11,14 +12,19 @@ const Contact = () => {
           content="Have questions or need assistance? Contact the Greenish team for support, inquiries, or feedback. We're always here to help you on your plant care journey!"
         />
       </Helmet>
+
+      {/* Main container */}
       <div className="max-w-3xl mx-auto px-6 py-12 text-green-900">
+        {/* Page heading */}
         <h1 className="text-3xl font-bold text-green-800 mb-6">Get in Touch</h1>
+
+        {/* Intro paragraph */}
         <p className="mb-8 text-lg">
           Whether you have a question, feedback, or just want to share your
           plant story — we’d love to hear from you!
         </p>
 
-        {/* Contact Info */}
+        {/* Contact information */}
         <div className="mb-10">
           <p className="mb-2">
             <strong>Email:</strong> support@greenish.com
@@ -31,7 +37,7 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Contact Form */}
+        {/* Contact form */}
         <form className="space-y-6">
           <div>
             <label htmlFor="name" className="block font-medium mb-1">
@@ -72,6 +78,7 @@ const Contact = () => {
             ></textarea>
           </div>
 
+          {/* Submit button */}
           <button
             type="submit"
             className="px-6 py-2 bg-green-600 text-white font-medium rounded hover:bg-green-700 transition-colors"

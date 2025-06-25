@@ -23,10 +23,10 @@ const Register = () => {
 
   const auth = getAuth();
 
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  // Simple email validation regex
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  // Form submit handler with validations and Firebase registration
   const handleSubmit = (e) => {
     e.preventDefault();
     let errors = "";
@@ -54,17 +54,19 @@ const Register = () => {
 
     setError("");
 
+    // Create user with email and password
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         const user = result.user;
 
-        // Update user
+        // Update user profile with name and photo URL
         updateProfile(user, {
           displayName: name,
           photoURL: photoURL,
         })
           .then(() => {
             console.log("User registered & profile updated:", user);
+            // Clear form
             setName("");
             setEmail("");
             setPassword("");
@@ -80,6 +82,7 @@ const Register = () => {
       });
   };
 
+  // Handler for Google sign-in via context provider
   const handleGoogleRegister = async () => {
     try {
       const result = await googleSignIn();
@@ -111,14 +114,16 @@ const Register = () => {
               Let’s grow your plant collection together!
             </p>
 
+            {/* Display error messages */}
             {error && (
               <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-left">
                 {error}
               </div>
             )}
 
+            {/* Registration form */}
             <form className="space-y-5" onSubmit={handleSubmit} noValidate>
-              {/* Name */}
+              {/* Name input */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Name
@@ -134,7 +139,7 @@ const Register = () => {
                 />
               </div>
 
-              {/* photo url */}
+              {/* Photo URL input */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Photo URL
@@ -150,7 +155,7 @@ const Register = () => {
                 />
               </div>
 
-              {/* Email */}
+              {/* Email input */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Email
@@ -166,7 +171,7 @@ const Register = () => {
                 />
               </div>
 
-              {/* Password */}
+              {/* Password input with toggle */}
               <div>
                 <label className="block text-sm text-left font-medium text-gray-700">
                   Password
@@ -198,6 +203,7 @@ const Register = () => {
                 </p>
               </div>
 
+              {/* Submit button */}
               <div>
                 <button
                   type="submit"
@@ -208,6 +214,7 @@ const Register = () => {
               </div>
             </form>
 
+            {/* Divider for alternative registration */}
             <div className="mt-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
@@ -220,6 +227,7 @@ const Register = () => {
                 </div>
               </div>
 
+              {/* Google Sign-in button */}
               <div className="mt-6">
                 <button
                   onClick={handleGoogleRegister}
@@ -231,6 +239,7 @@ const Register = () => {
               </div>
             </div>
 
+            {/* Link to login page */}
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Already have an account?{" "}

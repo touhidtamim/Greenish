@@ -25,13 +25,13 @@ const CTASection = () => {
     Swal.fire({
       title: "How It Works 🌿",
       html: `
-      <p style="font-size: 1rem; line-height: 1.5;">
-        🌱 Choose a subscription plan<br/>
-        📦 Receive hand-picked plants monthly<br/>
-        🧑‍🔧 Get expert care guides and tools<br/>
-        ❤️ Enjoy a greener, healthier space
-      </p>
-    `,
+        <p style="font-size: 1rem; line-height: 1.5;">
+          🌱 Choose a subscription plan<br/>
+          📦 Receive hand-picked plants monthly<br/>
+          🧑‍🔧 Get expert care guides and tools<br/>
+          ❤️ Enjoy a greener, healthier space
+        </p>
+      `,
       icon: "info",
       confirmButtonColor: "#16a34a",
       confirmButtonText: "Got it!",

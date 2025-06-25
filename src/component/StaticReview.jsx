@@ -1,11 +1,14 @@
 import React from "react";
 
+// StaticReview component displays a testimonial from a plant lover with styled background blur
 const StaticReview = () => {
   return (
     <div className="relative text-center mb-20 px-4">
+      {/* Decorative blurred circles */}
       <div className="absolute -top-10 left-10 w-28 h-28 bg-emerald-100 rounded-full opacity-20 blur-xl"></div>
       <div className="absolute -bottom-10 right-10 w-36 h-36 bg-emerald-100 rounded-full opacity-20 blur-xl"></div>
 
+      {/* Review card */}
       <div className="relative max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-[#f0fdf4] border border-emerald-100 p-4 md:p-10 sm:p-12 rounded-3xl shadow-lg">
         <h3 className="text-2xl md:text-3xl font-extrabold text-emerald-800 mb-4">
           💚 Stories from Plant Lovers

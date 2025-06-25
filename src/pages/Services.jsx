@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet-async";
 const Services = () => {
   return (
     <div>
+      {/* SEO meta tags */}
       <Helmet>
         <title>
           Greenish | Services - Explore Our Curated Plant Subscription Boxes
@@ -16,9 +17,11 @@ const Services = () => {
         />
       </Helmet>
 
-      <HowItWorks></HowItWorks>
+      {/* Section explaining how the service works */}
+      <HowItWorks />
 
-      <PlantCareSupport></PlantCareSupport>
+      {/* Section offering plant care support */}
+      <PlantCareSupport />
     </div>
   );
 };

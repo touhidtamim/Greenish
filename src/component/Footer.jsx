@@ -6,7 +6,7 @@ import { FaX } from "react-icons/fa6";
 const Footer = () => {
   return (
     <footer className="bg-[#000000] text-white mt-12 px-6 py-10 border-t border-green-100">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2  lg:grid-cols-4 gap-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <div>
           <Link to="/" className="flex items-center z-10">
             <img

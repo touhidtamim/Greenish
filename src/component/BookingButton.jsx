@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider ";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const BookingButton = () => {
   const { user } = useContext(AuthContext);
@@ -9,6 +9,7 @@ const BookingButton = () => {
 
   const handleBooking = () => {
     if (!user) {
+      // Prompt login if user is not authenticated
       Swal.fire({
         title: "Please Log In",
         text: "You need to be logged in to book a plant care session.",
@@ -24,6 +25,7 @@ const BookingButton = () => {
         }
       });
     } else {
+      // Show success message on booking
       Swal.fire({
         title: "Congratulations! 🎉",
         text: "You’re all set! Our plant expert will call you soon 🌿",

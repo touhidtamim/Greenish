@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 const TermsAndConditions = () => {
   return (
     <>
+      {/* SEO meta tags for the page */}
       <Helmet>
         <title>Greenish | Terms and Conditions - Your Agreement with Us</title>
         <meta
@@ -11,17 +12,22 @@ const TermsAndConditions = () => {
           content="Read the Greenish Terms and Conditions to understand our policies, terms of service, and your rights when using our plant subscription service."
         />
       </Helmet>
+
+      {/* Main content container with max width and padding */}
       <div className="max-w-4xl mx-auto px-6 py-12 text-green-900">
+        {/* Page heading */}
         <h1 className="text-3xl font-bold mb-6 text-green-800">
           Terms & Conditions
         </h1>
 
+        {/* Introductory paragraph */}
         <p className="mb-4">
           Welcome to <strong>Greenish</strong> 🌿. By using our website and
           subscribing to our services, you agree to the following terms and
           conditions. Please read them carefully.
         </p>
 
+        {/* Sections for terms */}
         <h2 className="text-xl font-semibold mt-8 mb-2">
           1. Subscription & Billing
         </h2>
@@ -82,6 +88,7 @@ const TermsAndConditions = () => {
           services constitutes agreement to the revised terms.
         </p>
 
+        {/* Last updated date */}
         <p className="mt-8 text-green-700 text-sm">
           Last updated: {new Date().toLocaleDateString()}
         </p>

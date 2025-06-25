@@ -2,17 +2,21 @@ const PlantCareMadeEasy = () => {
   return (
     <section className="bg-gradient-to-br from-[#fbf8fc] via-white to-[#e2f9f6] py-16 px-4 md:px-10">
       <div className="max-w-6xl mx-auto text-center">
+        {/* Section Title */}
         <h2 className="text-3xl md:text-4xl font-bold text-green-800 mb-6">
           Plant Care Made Easy
         </h2>
+
+        {/* Description */}
         <p className="text-green-700 max-w-2xl mx-auto mb-12">
           We don’t just deliver plants — we guide you every step of the way.
           From simple tips to expert advice, your green buddies are in safe
           hands.
         </p>
 
+        {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
-          {/* Card 1 */}
+          {/* Card 1 - Watering Reminders */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/watering.png"
@@ -27,7 +31,7 @@ const PlantCareMadeEasy = () => {
             </p>
           </div>
 
-          {/* Card 2 */}
+          {/* Card 2 - Light & Placement */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/large_sun.png"
@@ -43,7 +47,7 @@ const PlantCareMadeEasy = () => {
             </p>
           </div>
 
-          {/* Card 3 */}
+          {/* Card 3 - Expert Support */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/support.png"
@@ -59,7 +63,7 @@ const PlantCareMadeEasy = () => {
             </p>
           </div>
 
-          {/* Card 4 */}
+          {/* Card 4 - Community Care */}
           <div className="bg-white p-6 rounded-2xl shadow-md hover:shadow-lg transition duration-300 hover:scale-[1.05]">
             <img
               src="../../public/images/Group-Vector-PNG-Clipart.png"
@@ -76,6 +80,7 @@ const PlantCareMadeEasy = () => {
           </div>
         </div>
 
+        {/* Explore Guide Button */}
         <div className="mt-10">
           <a
             href="/greenish/plant-care"

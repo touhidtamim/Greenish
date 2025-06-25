@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthProvider ";
@@ -12,7 +12,9 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
+  // Handles login form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -24,17 +26,20 @@ const Login = () => {
 
     try {
       await signInUser(email, password);
-      navigate(location?.state || "/");
+      // Redirect to previous page or home
+      navigate(location.state?.from || "/");
     } catch (err) {
       setError("Invalid email or password");
       console.error(err.message);
     }
   };
 
+  // Handles Google OAuth login
   const handleGoogleLogin = async () => {
     try {
       await googleSignIn();
-      navigate(location?.state || "/");
+      // Redirect to previous page or home
+      navigate(location.state?.from || "/");
     } catch (err) {
       setError("Google login failed");
       console.error(err.message);
@@ -43,6 +48,7 @@ const Login = () => {
 
   return (
     <>
+      {/* SEO tags */}
       <Helmet>
         <title>Greenish | Login - Access Your Plant Subscription</title>
         <meta
@@ -51,6 +57,7 @@ const Login = () => {
         />
       </Helmet>
 
+      {/* Main container */}
       <div className="min-h-screen mt-10 rounded-2xl bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc] py-6 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
         <div className="max-w-md mx-auto bg-white/90 backdrop-blur-md rounded-3xl shadow-xl overflow-hidden w-full">
           <div className="p-8 text-center">
@@ -61,13 +68,16 @@ const Login = () => {
               Log in to continue your green journey with us
             </p>
 
+            {/* Error message */}
             {error && (
               <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
                 {error}
               </div>
             )}
 
+            {/* Login form */}
             <form className="space-y-6" onSubmit={handleSubmit}>
+              {/* Email input */}
               <div>
                 <label
                   htmlFor="email"
@@ -86,6 +96,7 @@ const Login = () => {
                 />
               </div>
 
+              {/* Password input with toggle visibility */}
               <div>
                 <label
                   htmlFor="password"
@@ -116,6 +127,7 @@ const Login = () => {
                 </div>
               </div>
 
+              {/* Submit button and forgot password link */}
               <div>
                 <button
                   type="submit"
@@ -135,6 +147,7 @@ const Login = () => {
               </div>
             </form>
 
+            {/* Divider with text */}
             <div className="mt-6">
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
@@ -147,6 +160,7 @@ const Login = () => {
                 </div>
               </div>
 
+              {/* Google login button */}
               <div className="mt-6">
                 <button
                   onClick={handleGoogleLogin}
@@ -158,6 +172,7 @@ const Login = () => {
               </div>
             </div>
 
+            {/* Register link */}
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Don’t have an account?{" "}

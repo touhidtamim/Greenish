@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../Provider/AuthProvider ";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const CarePageCTA = () => {
   const { user } = useContext(AuthContext);
@@ -10,6 +10,7 @@ const CarePageCTA = () => {
   const handleLearnMore = (type) => {
     if (type === "Start Your Journey") {
       if (!user) {
+        // Prompt login if user is not authenticated
         Swal.fire({
           icon: "warning",
           title: "Login Required",
@@ -24,6 +25,7 @@ const CarePageCTA = () => {
           }
         });
       } else {
+        // Show success message if user is logged in
         Swal.fire({
           icon: "success",
           title: "You're All Set! 🌱",
@@ -33,6 +35,7 @@ const CarePageCTA = () => {
         });
       }
     } else if (type === "Learn More") {
+      // Show informational message about the service
       Swal.fire({
         icon: "info",
         title: "Why Greenish?",
@@ -45,12 +48,14 @@ const CarePageCTA = () => {
 
   return (
     <div className="relative px-6 mt-10 overflow-hidden">
+      {/* Decorative background circles */}
       <div className="absolute inset-0">
         <div className="absolute -top-12 left-10 w-36 h-36 bg-green-100 rounded-full opacity-20 blur-xl"></div>
         <div className="absolute -bottom-12 right-10 w-48 h-48 bg-green-100 rounded-full opacity-20 blur-xl"></div>
       </div>
 
       <div className="relative max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-[#f0fdf4] p-10 sm:p-14 rounded-3xl shadow-xl border border-emerald-100 text-center">
+        {/* Decorative emojis */}
         <div className="text-5xl absolute top-6 left-6 text-green-200">🌼</div>
         <div className="text-5xl absolute bottom-6 right-6 text-green-200">
           🌿

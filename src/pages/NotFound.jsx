@@ -1,5 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const ErrorPage = () => {
         transition={{ duration: 0.5 }}
         className="max-w-md w-full text-center"
       >
-       
+        {/* Icon */}
         <div className="mb-8">
           <svg
             className="w-40 h-40 mx-auto text-green-400"
@@ -23,23 +23,27 @@ const ErrorPage = () => {
           >
             <path
               strokeLinecap="round"
-              strokeLinecap="round"
               strokeWidth="1.5"
               d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
             ></path>
           </svg>
-        </div>      
+        </div>
+
+        {/* Heading & Message */}
         <h1 className="text-5xl font-bold text-gray-800 mb-4">404</h1>
-        <h2 className="text-2xl font-semibold text-gray-700 mb-2">Oops! Page Not Found</h2>
+        <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+          Oops! Page Not Found
+        </h2>
         <p className="text-gray-600 mb-8">
           The page you're looking for doesn't exist or has been moved.
         </p>
-       
+
+        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate(-1)}
+            onClick={() => navigate(-1)} // Go back in history
             className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-all"
           >
             Go Back
@@ -48,13 +52,14 @@ const ErrorPage = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")} // Navigate to home
             className="px-6 py-3 border border-green-600 text-green-600 hover:bg-green-50 font-medium rounded-lg transition-all"
           >
             Return Home
           </motion.button>
         </div>
- 
+
+        {/* Decorative Emojis */}
         <div className="mt-12 flex justify-center space-x-8 opacity-60">
           <span className="text-3xl">🌿</span>
           <span className="text-3xl">🍃</span>

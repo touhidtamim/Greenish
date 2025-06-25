@@ -4,6 +4,7 @@ const FinalCTA = () => {
   return (
     <section className="relative overflow-hidden rounded-3xl my-20">
       <div className="flex flex-col md:flex-row min-h-[400px]">
+        {/* Image side with overlay */}
         <div
           className="md:w-1/2 bg-cover bg-center"
           style={{
@@ -11,6 +12,7 @@ const FinalCTA = () => {
           }}
         ></div>
 
+        {/* Text and CTA side */}
         <div className="md:w-1/2 bg-gradient-to-br from-[#fbf8fc] via-white to-[#e2f9f6] flex items-center px-6 py-12 md:p-14">
           <div className="max-w-lg mx-auto text-center md:text-left">
             <h2 className="text-3xl md:text-4xl font-extrabold text-green-800 mb-4 leading-tight">
@@ -26,8 +28,10 @@ const FinalCTA = () => {
               to="/greenish/services"
               className="relative inline-block px-8 py-4 font-semibold text-white bg-green-600 rounded-full overflow-hidden group shadow-md hover:shadow-xl"
             >
+              {/* Hover shine effect */}
               <span className="absolute inset-0 bg-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"></span>
               <span className="absolute top-0 left-0 w-10 h-full bg-white/30 -skew-x-12 transform -translate-x-full group-hover:translate-x-[300%] transition-transform duration-700 ease-in-out rounded-full"></span>
+
               <span className="relative z-10 flex items-center justify-center gap-2">
                 Claim Your Discount
                 <svg
