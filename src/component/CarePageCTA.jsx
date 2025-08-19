@@ -55,7 +55,7 @@ const CarePageCTA = () => {
       </div>
 
       <div className="relative max-w-3xl mx-auto bg-gradient-to-br from-green-50 to-[#f0fdf4] p-10 sm:p-14 rounded-3xl shadow-xl border border-emerald-100 text-center">
-        {/* Decorative emojis */}
+        {/* Decorative emoji */}
         <div className="text-5xl absolute top-6 left-6 text-green-200">🌼</div>
         <div className="text-5xl absolute bottom-6 right-6 text-green-200">
           🌿
