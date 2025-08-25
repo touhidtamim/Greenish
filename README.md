@@ -90,11 +90,23 @@ Unlike traditional plant delivery services, **Greenish** focuses on **ongoing ca
 
 ## 🖥️ Tech Stack
 
-- React JS
-- Firebase Authentication & Hosting
-- React Router DOM
-- Tailwind CSS / DaisyUI
+- React JS  
+- Firebase Authentication & Hosting  
+- React Router DOM  
+- Tailwind CSS / DaisyUI  
 - Deployed on **Firebase Hosting**
+
+---
+
+## 🧪 How to Run Locally
+
+Want to test or explore this project on your own machine? Follow these simple steps:
+
+- Clone the repository using Git.
+- Open the folder in your preferred code editor (like VS Code).
+- Run `npm install` to install all dependencies.
+- Run `npm run dev` to start the development server.
+- Open your browser and go to `http://localhost:5173` (or as shown in your terminal).
 
 ---
 
