@@ -3,8 +3,6 @@
 
 /* Import Tailwind CSS */
 @import "tailwindcss";
-
-/* DaisyUI plugin with default light theme */
 @plugin "daisyui" {
   themes: light --default;
 }
