@@ -14,7 +14,6 @@ const MainLayout = () => {
       <Navbar />
       <ScrollToTop />
 
-      {/* Show loading spinner during route transitions */}
       {navigation.state === "loading" && <LoadingSpinner />}
 
       {/* Main content area where nested routes render */}
