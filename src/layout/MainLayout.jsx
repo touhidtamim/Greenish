@@ -5,7 +5,6 @@ import Footer from "../component/Footer";
 import ScrollToTop from "../component/ScrollToTop";
 import LoadingSpinner from "../component/LoadingSpinner";
 
-// Main layout component wrapping the app with navbar, footer, scroll-to-top, and loading spinner
 const MainLayout = () => {
   const navigation = useNavigation();
 
