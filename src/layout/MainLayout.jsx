@@ -15,7 +15,6 @@ const MainLayout = () => {
 
       {navigation.state === "loading" && <LoadingSpinner />}
 
-      {/* Main content area where nested routes render */}
       <div className="w-11/12 mx-auto min-h-screen">
         <Outlet />
       </div>
