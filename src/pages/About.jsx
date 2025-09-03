@@ -19,13 +19,11 @@ const AboutUs = () => {
       {/* Main container with gradient background */}
       <div className="bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc]">
         <div className="md:max-w-6xl mx-auto px-4 py-12 md:py-20 text-center">
-          {/* Page heading */}
           <h1 className="text-4xl md:text-5xl font-extrabold text-emerald-600 mb-6 tracking-tight">
             About <span className="text-emerald-700">Greenish</span>
           </h1>
 
-          {/* Intro paragraph */}
-          <p className="text-md md:text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-12">
+          <p className="text-md md:text-lg lg:text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto mb-12">
             <span className="font-semibold text-emerald-500">Greenish</span>{" "}
             started with a simple belief — that nature heals. We help busy,
             modern lives reconnect with greenery, one plant at a time. Through
