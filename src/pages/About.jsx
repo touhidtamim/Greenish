@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet-async";
 const AboutUs = () => {
   return (
     <>
-      {/* SEO tags for About Us page */}
       <Helmet>
         <title>
           Greenish | About Us - Our Passion for Plants and Sustainability
