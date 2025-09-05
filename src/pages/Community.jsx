@@ -65,7 +65,6 @@ const Community = () => {
   const sectionRef = useRef(null);
   const visibleCards = showAll ? testimonials : testimonials.slice(0, 6);
 
-  // Toggle between showing all or limited testimonials, smooth scroll on collapse
   const handleToggle = () => {
     if (showAll && sectionRef.current) {
       sectionRef.current.scrollIntoView({ behavior: "smooth" });
