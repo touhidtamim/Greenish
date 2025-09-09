@@ -15,7 +15,6 @@ const AboutUs = () => {
         />
       </Helmet>
 
-      {/* Main container with gradient background */}
       <div className="bg-gradient-to-br from-[#fcfffc] via-[#fbf8fc] to-[#fcfffc]">
         <div className="md:max-w-6xl mx-auto px-4 py-12 md:py-20 text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold text-emerald-600 mb-6 tracking-tight">
