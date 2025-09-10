@@ -97,7 +97,6 @@ const Community = () => {
 
   return (
     <>
-      {/* SEO meta tags */}
       <Helmet>
         <title>
           Greenish | #GrowWithGreenish - Join Our Plant Lover Community
