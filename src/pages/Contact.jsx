@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 const Contact = () => {
   return (
     <>
-      {/* SEO setup for Contact page */}
       <Helmet>
         <title>Greenish | Contact Us - We're Here to Help You Grow</title>
         <meta
